@@ -3,6 +3,7 @@ extends Spatial
 export(int) var n_notes = 3
 
 var current_pitch
+var path_length
 
 
 func _ready():
@@ -11,8 +12,11 @@ func _ready():
 
     current_pitch = get_pitch(true)
 
+    var target = get_parent().get_parent().get_parent().get_node("Target")
+    _on_Monster_set_target(target)
 
-func _process(_delta):
+
+func _process(delta):
     if $Right.locked:
         var position = $Left/Hand.transform.origin
         position.x *= -1
@@ -29,6 +33,11 @@ func _process(_delta):
 
     if get_pitch(true) != current_pitch:
         sing()
+
+    $NotePath/Note.offset += delta * path_length
+
+    if $NotePath/Note.offset >= path_length:
+        $NotePath/Note.offset = 0
 
 
 ###########
@@ -48,6 +57,22 @@ func _on_Left_released():
 
 func _on_Right_released():
     $Left.locked = false
+
+
+func _on_Monster_set_target(spatial):
+    var target = spatial.get_global_transform()
+    target = global_transform.inverse() * target
+
+    var curve = $NotePath.get_curve().duplicate(true)
+    curve.clear_points()
+    curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3.UP)
+    curve.add_point(target.origin, Vector3.UP, Vector3.ZERO)
+    print(curve.get_baked_points())
+
+    path_length = curve.get_baked_length()
+
+    $NotePath.curve = curve
+    $NotePath/Note.offset = $NotePath.get_curve().get_baked_length() - 0.9
 
 
 func get_pitch(quantize=false):
