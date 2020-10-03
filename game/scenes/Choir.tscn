@@ -12,16 +12,16 @@ __meta__ = {
 [node name="Cultists" type="Node" parent="."]
 
 [node name="Cultist" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( 0.832941, 0, 0.553363, 0, 1, 0, -0.553363, 0, 0.832941, -2.97199, 0, -4.19996 )
+transform = Transform( 0.832941, 0, 0.553363, 0, 1, 0, -0.553363, 0, 0.832941, -4.28845, 0.00579929, -6.46164 )
 
 [node name="Cultist2" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( 0.710382, 0, -0.703816, 0, 1, 0, 0.703816, 0, 0.710382, 2.38572, 0, -4.7839 )
+transform = Transform( 0.710382, 0, -0.703816, 0, 1, 0, 0.703816, 0, 0.710382, 3.59388, 0, -7.16602 )
 
 [node name="Cultist3" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( -0.582847, 0, 0.812582, 0, 1, 0, -0.812582, 0, -0.582847, -3.3467, 0, -0.154545 )
+transform = Transform( -0.582847, 0, 0.812582, 0, 1, 0, -0.812582, 0, -0.582847, -5.80492, 0, 4.12533 )
 
 [node name="Cultist4" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( -0.872845, 0, -0.487997, 0, 1, 0, 0.487997, 0, -0.872845, 2.5108, -4.76837e-07, 1.00025 )
+transform = Transform( -0.872845, 0, -0.487997, 0, 1, 0, 0.487997, 0, -0.872845, 4.07521, -4.76837e-07, 4.9805 )
 
 [node name="Metronome" type="Timer" parent="."]
 wait_time = 0.2
