@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprites/Artboard 1.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 0.5, 0.5, 1 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.874233 ), 0.0, 0.768916, 0, 0, Vector2( 1, 0.898773 ), -0.7522, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
+scale = 1.2
+scale_random = 1.0
+scale_curve = SubResource( 3 )
+
+[sub_resource type="QuadMesh" id=5]
+
+[node name="NoteParticle" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00785965, 0.0152498, -0.00301075 )
+material_override = SubResource( 1 )
+amount = 1
+process_material = SubResource( 4 )
+draw_pass_1 = SubResource( 5 )
