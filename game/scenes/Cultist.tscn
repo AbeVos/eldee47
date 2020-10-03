@@ -31,15 +31,15 @@ material/0 = SubResource( 2 )
 
 [node name="sing_C" type="AudioStreamPlayer" parent="Tones"]
 stream = ExtResource( 4 )
-volume_db = -58.753
+volume_db = -2.701
 
 [node name="sing_D" type="AudioStreamPlayer" parent="Tones"]
 stream = ExtResource( 3 )
-volume_db = -58.753
+volume_db = -2.701
 
 [node name="sing_E" type="AudioStreamPlayer" parent="Tones"]
 stream = ExtResource( 5 )
-volume_db = -58.753
+volume_db = -2.701
 [connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
 [connection signal="released" from="Left" to="." method="_on_Left_released"]
 [connection signal="grabbed" from="Right" to="." method="_on_Right_grabbed"]
