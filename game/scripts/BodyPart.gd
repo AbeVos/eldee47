@@ -1,4 +1,4 @@
-extends Node
+extends Spatial
 
 signal body_part_complete
 signal body_part_failed
@@ -30,7 +30,7 @@ func update_body_part():
 			is_active = false
 			$Mesh.visible = false
 
-	print("body_part_progress: ", body_part_progress)
+	#print("body_part_progress: ", body_part_progress)
 
 
 func _on_IncrementTimer_timeout():
