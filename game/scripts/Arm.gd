@@ -65,8 +65,6 @@ func _process(delta):
     var height = $Hand.transform.origin.y
     value = (height + arm_radius) / (2 * arm_radius)
 
-    print(value)
-
 
 func _input(event):
     if event is InputEventMouseButton:
