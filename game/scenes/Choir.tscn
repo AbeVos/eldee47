@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Choir.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Cultist.tscn" type="PackedScene" id=2]
+
+[node name="Choir" type="Spatial"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cultists" type="Node" parent="."]
+
+[node name="Cultist" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( 0.832941, 0, 0.553363, 0, 1, 0, -0.553363, 0, 0.832941, -2.97199, 0, -4.19996 )
+
+[node name="Cultist2" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( 0.710382, 0, -0.703816, 0, 1, 0, 0.703816, 0, 0.710382, 2.38572, 0, -4.7839 )
+
+[node name="Cultist3" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.582847, 0, 0.812582, 0, 1, 0, -0.812582, 0, -0.582847, -3.3467, 0, -0.154545 )
+
+[node name="Cultist4" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.872845, 0, -0.487997, 0, 1, 0, 0.487997, 0, -0.872845, 2.5108, -4.76837e-07, 1.00025 )
+
+[node name="Metronome" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+[connection signal="timeout" from="Metronome" to="." method="_on_Metronome_timeout"]
