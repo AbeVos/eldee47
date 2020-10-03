@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Monster.tscn" type="PackedScene" id=1]
+[ext_resource path="res://materials/bloodMaterial.tres" type="Material" id=2]
+
+[sub_resource type="CylinderMesh" id=1]
+
+[node name="Main" type="Node"]
+
+[node name="IncrementTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Monster" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 6.74, 5.959 )
+
+[node name="Bloodpool" type="CSGMesh" parent="."]
+transform = Transform( 6, 0, 0, 0, 0.032, 0, 0, 0, 6, 0, 0, 0 )
+mesh = SubResource( 1 )
+material = ExtResource( 2 )
+[connection signal="timeout" from="IncrementTimer" to="Monster" method="_on_IncrementTimer_timeout"]
