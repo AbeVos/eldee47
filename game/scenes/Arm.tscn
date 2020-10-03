@@ -5,6 +5,7 @@
 [sub_resource type="SphereMesh" id=3]
 
 [sub_resource type="SpatialMaterial" id=4]
+vertex_color_use_as_albedo = true
 
 [node name="Arm" type="Spatial"]
 script = ExtResource( 1 )

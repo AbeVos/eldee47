@@ -1,5 +1,8 @@
 extends Spatial
 
+signal grabbed
+signal released
+
 export var hand_radius = 0.0005
 export var arm_radius = 1
 
@@ -8,10 +11,16 @@ var camera
 var mouse_over = false
 var dragging = false
 
+var locked = false
+var value = 0
+
 
 func _ready():
     viewport = get_viewport()
     camera = viewport.get_camera()
+
+    var mat = $Hand/Highlight.get_surface_material(0).duplicate(true)
+    $Hand/Highlight.set_surface_material(0, mat)
 
 
 func _process(delta):
@@ -53,10 +62,21 @@ func _process(delta):
 
         $Hand.transform.origin = direction * arm_radius
 
+    var height = $Hand.transform.origin.y
+    value = (height + arm_radius) / (2 * arm_radius)
+
+    print(value)
+
 
 func _input(event):
-    if event is InputEventMouseButton and mouse_over:
-        dragging = not dragging
+    if event is InputEventMouseButton:
+        if mouse_over and not locked:
+            if dragging:
+                dragging = false
+                emit_signal("released")
+            else:
+                dragging = true
+                emit_signal("grabbed")
 
 
 func normalize_screen_space(point, rect):

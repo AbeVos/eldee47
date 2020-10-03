@@ -1,11 +1,15 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/Arm.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Cultist.tscn" type="PackedScene" id=1]
 
 [node name="Spatial" type="Spatial"]
-
-[node name="Arm" parent="." instance=ExtResource( 1 )]
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.8937, 0.448664, 0, -0.448664, 0.8937, 0, 1.6314, 3.00062 )
 current = true
+
+[node name="Cultist" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.93068, 0, 0.365835, 0, 1, 0, -0.365835, 0, 0.93068, -1.86301, 0, -2.25683 )
+
+[node name="Cultist2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.961894, 0, -0.273422, 0, 1, 0, 0.273422, 0, 0.961894, 1.22511, 0, -2.53395 )
