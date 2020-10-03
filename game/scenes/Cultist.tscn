@@ -34,17 +34,6 @@ transform = Transform( 0.5, 0, 0, 0, -8.14603e-08, -0.8, 0, 0.5, -1.30337e-07, 0
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
-[node name="Tones" type="Node" parent="."]
-
-[node name="sing_C" type="AudioStreamPlayer" parent="Tones"]
-stream = ExtResource( 4 )
-
-[node name="sing_D" type="AudioStreamPlayer" parent="Tones"]
-stream = ExtResource( 3 )
-
-[node name="sing_E" type="AudioStreamPlayer" parent="Tones"]
-stream = ExtResource( 5 )
-
 [node name="NotePath" type="Path" parent="."]
 curve = SubResource( 3 )
 
@@ -53,6 +42,17 @@ cubic_interp = false
 
 [node name="NoteParticle" parent="NotePath/Note" instance=ExtResource( 6 )]
 visibility_aabb = AABB( -1, -1, -1, 2, 2, 2 )
+
+[node name="Tones" type="Spatial" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Tones"]
+stream = ExtResource( 4 )
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Tones"]
+stream = ExtResource( 3 )
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Tones"]
+stream = ExtResource( 5 )
 [connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
 [connection signal="released" from="Left" to="." method="_on_Left_released"]
 [connection signal="grabbed" from="Right" to="." method="_on_Right_grabbed"]
