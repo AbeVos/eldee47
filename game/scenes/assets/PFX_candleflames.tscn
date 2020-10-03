@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://materials/PMAT_Candleflame.material" type="Material" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.278481, 0.965909 ), 0.0, 0.0, 0, 0, Vector2( 0.651899, 0.929545 ), -0.236474, -0.236474, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+trail_divisor = 2
+direction = Vector3( 0, 1, 0 )
+spread = 5.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 0.2
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+angle = 360.0
+angle_random = 1.0
+scale = 0.1
+scale_random = 1.0
+scale_curve = SubResource( 2 )
+
+[sub_resource type="QuadMesh" id=4]
+
+[node name="CandleFlame" type="Spatial"]
+transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0 )
+
+[node name="Particles" type="Particles" parent="."]
+material_override = ExtResource( 1 )
+amount = 12
+speed_scale = 2.0
+randomness = 1.0
+visibility_aabb = AABB( -1, 0, -1, 2, 2, 2 )
+draw_order = 2
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
