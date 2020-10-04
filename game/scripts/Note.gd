@@ -27,6 +27,7 @@ func _process(delta):
     h_offset = altitude * cos(frequency * PI * unit_offset + random_offset)
     v_offset = altitude * sin(2 * frequency * PI * unit_offset + random_offset)
 
+
 func set_note(index):
     note_index = index
 
