@@ -1,7 +1,7 @@
 extends PathFollow
 
-const NOTE_GRID_ROWS = 2
-const NOTE_GRID_COLS = 2
+const NOTE_GRID_ROWS = 3
+const NOTE_GRID_COLS = 8
 
 export(float) var speed = 1
 export(float) var altitude = 1
@@ -32,15 +32,16 @@ func set_note(note):
     current_note = note
     var index = Globals.NOTES[note]
 
-    index = index % (NOTE_GRID_ROWS * NOTE_GRID_COLS)
+    # index = index % (NOTE_GRID_ROWS * NOTE_GRID_COLS)
 
     # Change note sprite.
-    var col = index % NOTE_GRID_ROWS
-    var row = (index - col) / NOTE_GRID_COLS
+    var col = index % NOTE_GRID_COLS
+    var row = (index - col) / NOTE_GRID_ROWS
 
-    var u = float(row) / NOTE_GRID_ROWS
-    var v = float(col) / NOTE_GRID_COLS
+    var u = float(col) / NOTE_GRID_COLS
+    var v = float(row) / NOTE_GRID_ROWS
     var uv_offset = Vector3(u, v, 0)
+    print("(%s,%s)" % [row, col], "%s: %s" % [note, index], uv_offset)
 
     material.uv1_offset = uv_offset
     $NoteParticle.material_override = material
