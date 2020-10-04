@@ -38,9 +38,11 @@ material/0 = SubResource( 2 )
 curve = SubResource( 3 )
 
 [node name="Note" type="PathFollow" parent="NotePath"]
+rotation_mode = 0
 cubic_interp = false
 
 [node name="NoteParticle" parent="NotePath/Note" instance=ExtResource( 6 )]
+amount = 4
 visibility_aabb = AABB( -1, -1, -1, 2, 2, 2 )
 
 [node name="Tones" type="Spatial" parent="."]
