@@ -20,9 +20,8 @@ func _ready():
     $Tones/Voice_1.stream = voice
     $Tones/Voice_1.playing = true
 
-    # TODO: Replace this with a signal emission.
-    var target = get_parent().get_parent().get_parent().get_node("Target")
-    _on_Monster_set_target(target)
+    # Make sure the note symbols float upwards.
+    set_symbol_target(null)
 
     var note_inst = note_scene.instance()
     $NotePath.add_child(note_inst)
@@ -71,8 +70,15 @@ func _on_Right_released():
     $Left.locked = false
 
 
-func _on_Monster_set_target(spatial):
+func _on_NoteTimer_timeout():
+    var note_inst = note_scene.instance()
+    $NotePath.add_child(note_inst)
+    note_inst.set_note(current_note)
+
+
+func set_symbol_target(spatial):
     # Set the target spatial for sending particles towards.
+    print("Set target to %s" % spatial)
 
     var start = get_global_transform().origin
 
@@ -146,6 +152,6 @@ func sing(pitch):
     current_pitch = pitch
     current_note = notes[pitch]
 
-    var note_inst = note_scene.instance()
-    $NotePath.add_child(note_inst)
-    note_inst.set_note(notes[pitch])
+    # var note_inst = note_scene.instance()
+    # $NotePath.add_child(note_inst)
+    # note_inst.set_note(notes[pitch])

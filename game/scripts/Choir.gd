@@ -5,9 +5,9 @@ signal send_assignments(group_key, assignment)
 const CultistResource = preload("res://scenes/Cultist.tscn")
 
 export var groups = {
-    1: ["A4", "C5", "B4"],
-    2: ["A5", "G5", "E6"],
-    3: ["A6", "A5", "A4"],
+    0: ["A4", "C5", "B4"],
+    1: ["A5", "G5", "E6"],
+    2: ["A6", "A5", "A4"],
 }
 
 func _ready():
@@ -30,6 +30,11 @@ func _on_Metronome_timeout():
 
     print("symbols: ", symbols)
     print("assignments: ", assignments)
+
+
+func _on_Monster_set_target(cultist_index, target):
+    print("AAAHHH")
+    $Cultists.get_children()[cultist_index].set_symbol_target(target)
 
 
 func assign_symbols(symbols):

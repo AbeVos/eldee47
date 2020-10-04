@@ -32,8 +32,6 @@ func set_note(note):
     current_note = note
     var index = Globals.NOTES[note]
 
-    # index = index % (NOTE_GRID_ROWS * NOTE_GRID_COLS)
-
     # Change note sprite.
     var col = index % NOTE_GRID_COLS
     var row = (index - col) / NOTE_GRID_ROWS
