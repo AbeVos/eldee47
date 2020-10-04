@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Arm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Cultist.gd" type="Script" id=2]
@@ -14,6 +14,11 @@ _data = {
 "points": PoolVector3Array(  ),
 "tilts": PoolRealArray(  )
 }
+
+[sub_resource type="PrismMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_unshaded = true
 
 [node name="Cultist" type="Spatial"]
 script = ExtResource( 2 )
@@ -44,6 +49,11 @@ curve = SubResource( 3 )
 [node name="Note" parent="NotePath" instance=ExtResource( 6 )]
 
 [node name="Tones" type="Spatial" parent="."]
+
+[node name="Hat" type="MeshInstance" parent="."]
+transform = Transform( 0.259723, 0, 0, 0, 0.259723, 0, 0, 0, 0.259723, 0.00508595, 1.36917, 0.0019474 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 [connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
 [connection signal="released" from="Left" to="." method="_on_Left_released"]
 [connection signal="grabbed" from="Right" to="." method="_on_Right_grabbed"]

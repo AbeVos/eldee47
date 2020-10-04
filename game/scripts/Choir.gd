@@ -11,6 +11,8 @@ export var groups = {
 }
 export var tones = ["C", "E", "G"]
 
+func _ready():
+    hat_colors()
 
 func _on_Metronome_timeout():
     # Collect symbols.
@@ -26,14 +28,15 @@ func _on_Metronome_timeout():
     for group_key in groups:
         emit_signal("send_assignments", group_key, assignments[group_key])
 
-    print(symbols)
-    print(assignments)
+    print("symbols: ", symbols)
+    print("assignments: ", assignments)
 
 
 func assign_symbols(symbols):
     # Go through each singer's symbol and assign them to the first group
     # that has no singer assigned for that group.
     var assignments = init_group_assignments()
+    #print("init_group_assignments: ", assignments)
 
     for symbol_idx in range(len(symbols)):
         var symbol = symbols[symbol_idx]
@@ -73,3 +76,12 @@ func init_group_assignments():
             assignments[group_key].append(null)
 
     return assignments
+
+func hat_colors():
+    var colors = ["#E8ECFB", "#B997C7", "#824D99", "#4E78C4", "#57A2AC", "#7EB875", "#D0B541","#E67F33", "#CE2220", "#521A13"]
+    for i in range(0, $Cultists.get_child_count()):
+        var hat = $Cultists.get_child(i).get_node("Hat")
+
+        var mat = hat.get_surface_material(0).duplicate(true)
+        mat.albedo_color = colors[i]
+        hat.set_surface_material(0, mat)
