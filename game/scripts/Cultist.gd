@@ -1,7 +1,9 @@
 extends Spatial
 
-export(AudioStream) var voice
 export(String) var central_note = "A4"
+
+export(int) var index
+export(Array, AudioStream) var vocals = []
 
 var note_scene = preload("res://scenes/Note.tscn")
 var current_pitch
@@ -16,9 +18,13 @@ func _ready():
     current_pitch = null
     current_note = null
 
-    assert(voice != null)
-    $Tones/Voice_1.stream = voice
-    $Tones/Voice_1.playing = true
+    assert(len(vocals) == 3)
+
+    var voices = $Voices.get_children()
+
+    for idx in range(3):
+        voices[idx].stream = vocals[idx]
+        voices[idx].playing = true
 
     # Make sure the note symbols float upwards.
     set_symbol_target(null)

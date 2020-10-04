@@ -23,6 +23,10 @@ mesh = SubResource( 1 )
 material = ExtResource( 2 )
 
 [node name="Choir" parent="." instance=ExtResource( 3 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+
+[node name="MonsterAmbient" type="AudioStreamPlayer" parent="."]
 [connection signal="timeout" from="IncrementTimer" to="Monster" method="_on_IncrementTimer_timeout"]
 [connection signal="set_target" from="Monster" to="Choir" method="_on_Monster_set_target"]
 [connection signal="send_assignments" from="Choir" to="Monster" method="_on_Choir_send_assignments"]
