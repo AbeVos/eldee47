@@ -1,13 +1,20 @@
 extends Spatial
 
-export(int) var n_notes = 3
+export var notes = {
+    0: 0.749,
+    1: 1.0,
+    2: 1.335,
+}
 
+var n_notes
 var current_pitch
 
 
 func _ready():
     var mat = $Body.get_surface_material(0).duplicate(true)
     $Body.set_surface_material(0, mat)
+
+    n_notes = len(notes)
 
     current_pitch = get_pitch(true)
 
@@ -23,7 +30,6 @@ func _process(_delta):
         $Left/Hand.transform.origin = position
 
     var mat = $Body.get_surface_material(0)
-    # print(get_pitch(), get_pitch(true) / n_notes)
     mat.albedo_color = Color(1, float(get_pitch(true)) / (n_notes - 1), 0)
     $Body.set_surface_material(0, mat)
 
@@ -65,8 +71,7 @@ func get_pitch(quantize=false):
 func sing():
     var pitch = get_pitch(true)
 
-    var tones = $Tones.get_children()
+    # Change pitch.
+    $Tones/Voice_1.pitch_scale = notes[pitch]
 
-    tones[current_pitch].stop()
-    tones[pitch].play(0.0)
     current_pitch = pitch
