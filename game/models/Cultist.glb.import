@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/MOD_Column.dae-1dc738a3f56feea576fc9a524fec4fc4.scn"
+path="res://.import/Cultist.glb-880085c950f932f3abb2c5d726f6d8ab.scn"
 
 [deps]
 
-source_file="res://models/MOD_Column.dae"
-dest_files=[ "res://.import/MOD_Column.dae-1dc738a3f56feea576fc9a524fec4fc4.scn" ]
+source_file="res://models/Cultist.glb"
+dest_files=[ "res://.import/Cultist.glb-880085c950f932f3abb2c5d726f6d8ab.scn" ]
 
 [params]
 
@@ -26,7 +26,7 @@ meshes/light_baking=0
 meshes/lightmap_texel_size=0.1
 skins/use_named_skins=true
 external_files/store_in_subdir=false
-animation/import=false
+animation/import=true
 animation/fps=15
 animation/filter_script=""
 animation/storage=false

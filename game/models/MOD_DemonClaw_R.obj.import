@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/MOD_DemonClaw_R.obj-7b304057be04ae5419a236516749fd78.mesh"
+
+[deps]
+
+files=[ "res://.import/MOD_DemonClaw_R.obj-7b304057be04ae5419a236516749fd78.mesh" ]
+
+source_file="res://models/MOD_DemonClaw_R.obj"
+dest_files=[ "res://.import/MOD_DemonClaw_R.obj-7b304057be04ae5419a236516749fd78.mesh", "res://.import/MOD_DemonClaw_R.obj-7b304057be04ae5419a236516749fd78.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

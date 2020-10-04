@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/MOD_Candleholder.obj-594468d6a90c904782fe9f7efb1d16fb.mesh"
+
+[deps]
+
+files=[ "res://.import/MOD_Candleholder.obj-594468d6a90c904782fe9f7efb1d16fb.mesh" ]
+
+source_file="res://models/MOD_Candleholder.obj"
+dest_files=[ "res://.import/MOD_Candleholder.obj-594468d6a90c904782fe9f7efb1d16fb.mesh", "res://.import/MOD_Candleholder.obj-594468d6a90c904782fe9f7efb1d16fb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
