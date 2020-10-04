@@ -12,18 +12,38 @@ __meta__ = {
 [node name="Cultists" type="Node" parent="."]
 
 [node name="Cultist" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( 0.832941, 0, 0.553363, 0, 1, 0, -0.553363, 0, 0.832941, -4.28845, 0.00579929, -6.46164 )
+transform = Transform( 0.88537, 0, 0.464889, 0, 1, 0, -0.464889, 0, 0.88537, -3.62161, 0.00579929, -6.07265 )
 
 [node name="Cultist2" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( 0.710382, 0, -0.703816, 0, 1, 0, 0.703816, 0, 0.710382, 3.59388, 0, -7.16602 )
+transform = Transform( 0.534219, 0, 0.845346, 0, 1, 0, -0.845346, 0, 0.534219, -6.74214, 0, -2.75376 )
 
 [node name="Cultist3" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( -0.582847, 0, 0.812582, 0, 1, 0, -0.812582, 0, -0.582847, -5.80492, 0, 4.12533 )
+transform = Transform( -0.882357, 0, 0.47058, 0, 1, 0, -0.47058, 0, -0.882357, -3.70438, 0, 6.61486 )
 
 [node name="Cultist4" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( -0.872845, 0, -0.487997, 0, 1, 0, 0.487997, 0, -0.872845, 4.07521, -4.76837e-07, 4.9805 )
+transform = Transform( -0.560089, 0, -0.828432, 0, 1, 0, 0.828432, 0, -0.560089, 5.68674, -4.76837e-07, 4.64708 )
+
+[node name="Cultist5" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.020942, 0, -0.99978, 0, 1, 0, 0.99978, 0, -0.020942, 7.33161, -4.76837e-07, 0.0125455 )
+
+[node name="Cultist6" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.361218, 0, 0.932481, 0, 1, 0, -0.932481, 0, -0.361218, -6.84985, -4.76837e-07, 2.49097 )
+
+[node name="Cultist7" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.949666, 0, -0.313264, 0, 1, 0, 0.313264, 0, -0.949666, 1.45231, -4.76837e-07, 7.13662 )
+
+[node name="Cultist8" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( 0.996357, 0, -0.0852774, 0, 1, 0, 0.0852774, 0, 0.996357, 1.11889, -4.76837e-07, -6.91147 )
+
+[node name="Cultist9" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( 0.630635, 0, -0.776079, 0, 1, 0, 0.776079, 0, 0.630635, 5.5756, -4.76837e-07, -4.53308 )
 
 [node name="Metronome" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 2.0
 autostart = true
+
+[node name="CSGCylinder" type="CSGCylinder" parent="."]
+visible = false
+radius = 6.20486
+sides = 9
 [connection signal="timeout" from="Metronome" to="." method="_on_Metronome_timeout"]
