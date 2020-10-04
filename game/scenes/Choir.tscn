@@ -23,6 +23,7 @@ transform = Transform( 0.88537, 0, 0.464889, 0, 1, 0, -0.464889, 0, 0.88537, -3.
 [node name="Cultist2" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( 0.534219, 0, 0.845346, 0, 1, 0, -0.845346, 0, 0.534219, -6.74214, 0, -2.75376 )
 voice = ExtResource( 5 )
+central_note = "C5"
 
 [node name="Cultist3" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.882357, 0, 0.47058, 0, 1, 0, -0.47058, 0, -0.882357, -3.70438, 0, 6.61486 )

@@ -8,7 +8,7 @@ export(float) var altitude = 1
 export(int) var frequency = 1
 
 var random_offset
-var note_index
+var current_note
 var material
 
 func _ready():
@@ -27,8 +27,12 @@ func _process(delta):
     h_offset = altitude * cos(frequency * PI * unit_offset + random_offset)
     v_offset = altitude * sin(2 * frequency * PI * unit_offset + random_offset)
 
-func set_note(index):
-    note_index = index
+
+func set_note(note):
+    current_note = note
+    var index = Globals.NOTES[note]
+
+    index = index % (NOTE_GRID_ROWS * NOTE_GRID_COLS)
 
     # Change note sprite.
     var col = index % NOTE_GRID_ROWS

@@ -1,14 +1,9 @@
 extends Spatial
 
 export(AudioStream) var voice
-export var notes = {
-    0: 0.749,
-    1: 1.0,
-    2: 1.335,
-}
+export(String) var central_note = "A4"
 
-var n_notes
-var note = preload("res://scenes/Note.tscn")
+var note_scene = preload("res://scenes/Note.tscn")
 var current_pitch
 var uv_offset = Vector3(0, 0, 0)
 
@@ -16,8 +11,6 @@ var uv_offset = Vector3(0, 0, 0)
 func _ready():
     var mat = $Body.get_surface_material(0).duplicate(true)
     $Body.set_surface_material(0, mat)
-
-    n_notes = len(notes)
 
     current_pitch = get_pitch(true)
 
@@ -29,9 +22,9 @@ func _ready():
     var target = get_parent().get_parent().get_parent().get_node("Target")
     _on_Monster_set_target(target)
 
-    var note_inst = note.instance()
+    var note_inst = note_scene.instance()
     $NotePath.add_child(note_inst)
-    note_inst.set_note(current_pitch)
+    note_inst.set_note(central_note)
 
 
 func _process(_delta):
@@ -45,7 +38,9 @@ func _process(_delta):
         $Left/Hand.transform.origin = position
 
     var mat = $Body.get_surface_material(0)
-    mat.albedo_color = Color(1, float(get_pitch(true)) / (n_notes - 1), 0)
+    mat.albedo_color = Color(
+        1, float(get_pitch(true)) / (Globals.N_PITCHES - 1), 0
+    )
     $Body.set_surface_material(0, mat)
 
     var pitch = get_pitch(true)
@@ -119,21 +114,30 @@ func _on_Monster_set_target(spatial):
 func get_pitch(quantize=false):
     # Get the cultist's pitch based on arm height.
     # If quantize is true, the pitch will be an integer
-    # in {0, ..., n_notes - 1}, otherwise it will be a real number in
+    # in {0, ..., N_PITCHES - 1}, otherwise it will be a real number in
     # [0, 1].
     if not quantize:
         return ($Left.value + $Right.value) / 2
     else:
-        var value = get_pitch(false) * (n_notes - 1)
+        var value = get_pitch(false) * (Globals.N_PITCHES - 1)
         return int(round(value))
 
 
 func sing(pitch):
     # Change pitch.
-    $Tones/Voice_1.pitch_scale = notes[pitch]
+    $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
+
+    var note_idx = Globals.NOTES.keys().find(central_note);
+    assert(note_idx >= 0)
+
+    var notes = [
+        Globals.NOTES.keys()[note_idx - Globals.SEMITONES],
+        central_note,
+        Globals.NOTES.keys()[note_idx + Globals.SEMITONES],
+    ]
 
     current_pitch = pitch
 
-    var note_inst = note.instance()
+    var note_inst = note_scene.instance()
     $NotePath.add_child(note_inst)
-    note_inst.set_note(pitch)
+    note_inst.set_note(notes[pitch])
