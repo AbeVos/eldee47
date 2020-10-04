@@ -7,7 +7,9 @@ export var notes = {
 }
 
 var n_notes
+var note = preload("res://scenes/Note.tscn")
 var current_pitch
+var uv_offset = Vector3(0, 0, 0)
 
 
 func _ready():
@@ -17,6 +19,14 @@ func _ready():
     n_notes = len(notes)
 
     current_pitch = get_pitch(true)
+
+    # TODO: Replace this with a signal emission.
+    var target = get_parent().get_parent().get_parent().get_node("Target")
+    _on_Monster_set_target(target)
+
+    var note_inst = note.instance()
+    $NotePath.add_child(note_inst)
+    note_inst.set_note(current_pitch)
 
 
 func _process(_delta):
@@ -33,8 +43,11 @@ func _process(_delta):
     mat.albedo_color = Color(1, float(get_pitch(true)) / (n_notes - 1), 0)
     $Body.set_surface_material(0, mat)
 
-    if get_pitch(true) != current_pitch:
-        sing()
+    var pitch = get_pitch(true)
+
+    if pitch != current_pitch:
+        # Pitch has changed.
+        sing(pitch)
 
 
 ###########
@@ -56,6 +69,48 @@ func _on_Right_released():
     $Left.locked = false
 
 
+func _on_Monster_set_target(spatial):
+    # Set the target spatial for sending particles towards.
+
+    var start = get_global_transform().origin
+
+    var target
+    var center
+    var offset
+    var direction
+
+    if spatial == null:
+        target = 3 * Vector3.UP
+    else:
+        target = spatial.get_global_transform()
+        target = (global_transform.inverse() * target).origin
+
+        center = 0.5 * (start + target)
+
+        # Get a vector pointing from start towards target.
+        direction = (target - start).normalized()
+
+        # Project the direction vector onto the XZ plane.
+        var projection = Vector3(direction.x, 0, -direction.z).normalized()
+
+        offset = (direction).cross(projection).normalized()
+
+    var curve = $NotePath.get_curve().duplicate(true)
+    curve.clear_points()
+    curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
+
+    if spatial != null:
+        curve.add_point(
+            center + 2 * offset,
+            -direction,
+            direction
+        )
+
+    curve.add_point(target, Vector3.ZERO, Vector3.ZERO)
+
+    $NotePath.curve = curve
+
+
 func get_pitch(quantize=false):
     # Get the cultist's pitch based on arm height.
     # If quantize is true, the pitch will be an integer
@@ -68,10 +123,12 @@ func get_pitch(quantize=false):
         return int(round(value))
 
 
-func sing():
-    var pitch = get_pitch(true)
-
+func sing(pitch):
     # Change pitch.
     $Tones/Voice_1.pitch_scale = notes[pitch]
 
     current_pitch = pitch
+
+    var note_inst = note.instance()
+    $NotePath.add_child(note_inst)
+    note_inst.set_note(pitch)
