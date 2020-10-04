@@ -35,3 +35,6 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fade = SubResource( 1 )
+
+[node name="AudioTimer" type="Timer" parent="."]
+wait_time = 677.97
