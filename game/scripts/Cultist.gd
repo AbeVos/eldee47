@@ -2,7 +2,9 @@ extends Spatial
 
 export(int) var n_notes = 3
 
+var note = preload("res://scenes/Note.tscn")
 var current_pitch
+var uv_offset = Vector3(0, 0, 0)
 
 
 func _ready():
@@ -13,7 +15,11 @@ func _ready():
 
     # TODO: Replace this with a signal emission.
     var target = get_parent().get_parent().get_parent().get_node("Target")
-    _on_Monster_set_target(null)
+    _on_Monster_set_target(target)
+
+    var note_inst = note.instance()
+    $NotePath.add_child(note_inst)
+    note_inst.set_note(current_pitch)
 
 
 func _process(_delta):
@@ -27,12 +33,14 @@ func _process(_delta):
         $Left/Hand.transform.origin = position
 
     var mat = $Body.get_surface_material(0)
-    # print(get_pitch(), get_pitch(true) / n_notes)
     mat.albedo_color = Color(1, float(get_pitch(true)) / (n_notes - 1), 0)
     $Body.set_surface_material(0, mat)
 
-    if get_pitch(true) != current_pitch:
-        sing()
+    var pitch = get_pitch(true)
+
+    if pitch != current_pitch:
+        # Pitch has changed.
+        sing(pitch)
 
 
 ###########
@@ -92,7 +100,6 @@ func _on_Monster_set_target(spatial):
         )
 
     curve.add_point(target, Vector3.ZERO, Vector3.ZERO)
-    print(curve.get_baked_points())
 
     $NotePath.curve = curve
 
@@ -109,11 +116,13 @@ func get_pitch(quantize=false):
         return int(round(value))
 
 
-func sing():
-    var pitch = get_pitch(true)
-
+func sing(pitch):
     var tones = $Tones.get_children()
 
     tones[current_pitch].stop()
     tones[pitch].play(0.0)
     current_pitch = pitch
+
+    var note_inst = note.instance()
+    $NotePath.add_child(note_inst)
+    note_inst.set_note(pitch)

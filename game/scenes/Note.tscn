@@ -21,6 +21,7 @@ scale_curve = SubResource( 2 )
 [node name="Note" type="PathFollow"]
 rotation_mode = 4
 cubic_interp = false
+loop = false
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
