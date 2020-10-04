@@ -3,7 +3,6 @@ extends Spatial
 export(int) var n_notes = 3
 
 var current_pitch
-var path_length
 
 
 func _ready():
@@ -16,7 +15,7 @@ func _ready():
     _on_Monster_set_target(target)
 
 
-func _process(delta):
+func _process(_delta):
     if $Right.locked:
         var position = $Left/Hand.transform.origin
         position.x *= -1
@@ -33,12 +32,6 @@ func _process(delta):
 
     if get_pitch(true) != current_pitch:
         sing()
-
-    $NotePath/Note.offset += delta * path_length
-
-    if $NotePath/Note.offset >= path_length:
-        $NotePath/Note.offset = 0
-        $NotePath/Note/NoteParticle.restart()
 
 
 ###########
@@ -61,19 +54,32 @@ func _on_Right_released():
 
 
 func _on_Monster_set_target(spatial):
+    var start = get_global_transform().origin
     var target = spatial.get_global_transform()
-    target = global_transform.inverse() * target
+    target = (global_transform.inverse() * target).origin
+
+    var center = 0.5 * (start + target)
+
+    # Get a vector pointing from start towards target.
+    var direction = (target - start).normalized()
+
+    # Project the direction vector onto the XZ plane.
+    var projection = Vector3(direction.x, 0, -direction.z).normalized()
+
+    var offset = (direction).cross(projection).normalized()
 
     var curve = $NotePath.get_curve().duplicate(true)
     curve.clear_points()
-    curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3.UP)
-    curve.add_point(target.origin, Vector3.UP, Vector3.ZERO)
+    curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
+    curve.add_point(
+        center + 2 * offset,
+        -direction,
+        direction
+    )
+    curve.add_point(target, Vector3.ZERO, Vector3.ZERO)
     print(curve.get_baked_points())
 
-    path_length = curve.get_baked_length()
-
     $NotePath.curve = curve
-    $NotePath/Note.offset = $NotePath.get_curve().get_baked_length() - 0.9
 
 
 func get_pitch(quantize=false):
