@@ -7,6 +7,10 @@ signal monster_partial
 onready var results = []
 onready var is_active = true
 
+func _on_Choir_send_assignments(group_key, assignment):
+	pass
+	#print("Group key: ", group_key, " Assignment: ", assignment)
+
 func _process(delta):
 	if (is_active and results.size() >= 3):
 		is_active = false
@@ -24,9 +28,10 @@ func _process(delta):
 
 
 func _on_IncrementTimer_timeout():
-	$Head.update_body_part()
-	$Claw_left.update_body_part()
-	$Claw_right.update_body_part()
+	#$Head.update_body_part()
+	#$Claw_left.update_body_part()
+	#$Claw_right.update_body_part()
+	pass
 
 
 func _on_Head_body_part_failed():
