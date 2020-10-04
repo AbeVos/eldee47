@@ -1,5 +1,6 @@
 extends Spatial
 
+export(AudioStream) var voice
 export var notes = {
     0: 0.749,
     1: 1.0,
@@ -19,6 +20,10 @@ func _ready():
     n_notes = len(notes)
 
     current_pitch = get_pitch(true)
+
+    assert(voice != null)
+    $Tones/Voice_1.stream = voice
+    $Tones/Voice_1.playing = true
 
     # TODO: Replace this with a signal emission.
     var target = get_parent().get_parent().get_parent().get_node("Target")
