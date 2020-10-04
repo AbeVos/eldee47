@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://models/MOD_DemonClaw_R.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://models/MAT_Demon.material" type="Material" id=2]
+
+[node name="Demon_Claw_L" type="Spatial"]
+
+[node name="MOD_DemonClaw_L" type="MeshInstance" parent="."]
+transform = Transform( -0.01, 0, 0, 0, 0.01, -8.74228e-10, 0, 8.74228e-10, 0.01, 0, 0, 0 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = null
