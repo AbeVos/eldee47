@@ -5,6 +5,7 @@ export(String) var central_note = "A4"
 
 var note_scene = preload("res://scenes/Note.tscn")
 var current_pitch
+var current_note
 var uv_offset = Vector3(0, 0, 0)
 
 
@@ -12,7 +13,8 @@ func _ready():
     var mat = $Body.get_surface_material(0).duplicate(true)
     $Body.set_surface_material(0, mat)
 
-    current_pitch = get_pitch(true)
+    current_pitch = null
+    current_note = null
 
     assert(voice != null)
     $Tones/Voice_1.stream = voice
@@ -123,6 +125,10 @@ func get_pitch(quantize=false):
         return int(round(value))
 
 
+func get_note():
+    return current_note
+
+
 func sing(pitch):
     # Change pitch.
     $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
@@ -130,6 +136,7 @@ func sing(pitch):
     var note_idx = Globals.NOTES.keys().find(central_note);
     assert(note_idx >= 0)
 
+    # Collect the notes based on semitone distance from the central note.
     var notes = [
         Globals.NOTES.keys()[note_idx - Globals.SEMITONES],
         central_note,
@@ -137,6 +144,7 @@ func sing(pitch):
     ]
 
     current_pitch = pitch
+    current_note = notes[pitch]
 
     var note_inst = note_scene.instance()
     $NotePath.add_child(note_inst)
