@@ -1,7 +1,7 @@
 extends PathFollow
 
-const NOTE_GRID_ROWS = 2
-const NOTE_GRID_COLS = 2
+const NOTE_GRID_ROWS = 4
+const NOTE_GRID_COLS = 4
 
 export(float) var speed = 1
 export(float) var altitude = 1
