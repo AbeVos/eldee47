@@ -1,14 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Arm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Cultist.gd" type="Script" id=2]
 [ext_resource path="res://audio/d.wav" type="AudioStream" id=3]
 [ext_resource path="res://audio/c.wav" type="AudioStream" id=4]
 [ext_resource path="res://audio/e.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/Note.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
+
+[sub_resource type="Curve3D" id=3]
+_data = {
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
+}
 
 [node name="Cultist" type="Spatial"]
 script = ExtResource( 2 )
@@ -27,15 +34,20 @@ transform = Transform( 0.5, 0, 0, 0, -8.14603e-08, -0.8, 0, 0.5, -1.30337e-07, 0
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
-[node name="Tones" type="Node" parent="."]
+[node name="NotePath" type="Path" parent="."]
+curve = SubResource( 3 )
 
-[node name="sing_C" type="AudioStreamPlayer" parent="Tones"]
+[node name="Note" parent="NotePath" instance=ExtResource( 6 )]
+
+[node name="Tones" type="Spatial" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Tones"]
 stream = ExtResource( 4 )
 
-[node name="sing_D" type="AudioStreamPlayer" parent="Tones"]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Tones"]
 stream = ExtResource( 3 )
 
-[node name="sing_E" type="AudioStreamPlayer" parent="Tones"]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Tones"]
 stream = ExtResource( 5 )
 [connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
 [connection signal="released" from="Left" to="." method="_on_Left_released"]
