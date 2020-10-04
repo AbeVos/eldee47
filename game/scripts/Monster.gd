@@ -1,9 +1,6 @@
 extends Spatial
 
 signal set_target(cultist_index, target)  # Target for particles.
-signal monster_done
-signal monster_failed
-signal monster_partial
 
 onready var results = []
 onready var is_active = true
@@ -33,13 +30,10 @@ func _process(_delta):
 		for i in range(results.size()):
 			total += i
 		if (total >= results.size()):
-			emit_signal("monster_done")
 			SceneChanger.change_scene("res://scenes/WinScene.tscn", 0.5)
 		elif (total > 0):
-			emit_signal("monster_partial")
 			SceneChanger.change_scene("res://scenes/FailScene.tscn", 0.5)
 		else:
-			emit_signal("monster_failed")
 			SceneChanger.change_scene("res://scenes/FailScene.tscn", 0.5)
 
 
