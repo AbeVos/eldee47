@@ -1,15 +1,11 @@
 extends Spatial
 
 export(AudioStream) var voice
-export var notes = {
-    0: 0.749,
-    1: 1.0,
-    2: 1.335,
-}
+export(String) var central_note = "A4"
 
-var n_notes
-var note = preload("res://scenes/Note.tscn")
+var note_scene = preload("res://scenes/Note.tscn")
 var current_pitch
+var current_note
 var uv_offset = Vector3(0, 0, 0)
 
 
@@ -17,9 +13,8 @@ func _ready():
     var mat = $Body.get_surface_material(0).duplicate(true)
     $Body.set_surface_material(0, mat)
 
-    n_notes = len(notes)
-
-    current_pitch = get_pitch(true)
+    current_pitch = null
+    current_note = null
 
     assert(voice != null)
     $Tones/Voice_1.stream = voice
@@ -28,9 +23,9 @@ func _ready():
     # Make sure the note symbols float upwards.
     set_symbol_target(null)
 
-    var note_inst = note.instance()
+    var note_inst = note_scene.instance()
     $NotePath.add_child(note_inst)
-    note_inst.set_note(current_pitch)
+    note_inst.set_note(central_note)
 
 
 func _process(_delta):
@@ -44,7 +39,9 @@ func _process(_delta):
         $Left/Hand.transform.origin = position
 
     var mat = $Body.get_surface_material(0)
-    mat.albedo_color = Color(1, float(get_pitch(true)) / (n_notes - 1), 0)
+    mat.albedo_color = Color(
+        1, float(get_pitch(true)) / (Globals.N_PITCHES - 1), 0
+    )
     $Body.set_surface_material(0, mat)
 
     var pitch = get_pitch(true)
@@ -74,9 +71,9 @@ func _on_Right_released():
 
 
 func _on_NoteTimer_timeout():
-    var note_inst = note.instance()
+    var note_inst = note_scene.instance()
     $NotePath.add_child(note_inst)
-    note_inst.set_note(current_pitch)
+    note_inst.set_note(current_note)
 
 
 func set_symbol_target(spatial):
@@ -125,21 +122,36 @@ func set_symbol_target(spatial):
 func get_pitch(quantize=false):
     # Get the cultist's pitch based on arm height.
     # If quantize is true, the pitch will be an integer
-    # in {0, ..., n_notes - 1}, otherwise it will be a real number in
+    # in {0, ..., N_PITCHES - 1}, otherwise it will be a real number in
     # [0, 1].
     if not quantize:
         return ($Left.value + $Right.value) / 2
     else:
-        var value = get_pitch(false) * (n_notes - 1)
+        var value = get_pitch(false) * (Globals.N_PITCHES - 1)
         return int(round(value))
+
+
+func get_note():
+    return current_note
 
 
 func sing(pitch):
     # Change pitch.
-    $Tones/Voice_1.pitch_scale = notes[pitch]
+    $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
+
+    var note_idx = Globals.NOTES.keys().find(central_note);
+    assert(note_idx >= 0)
+
+    # Collect the notes based on semitone distance from the central note.
+    var notes = [
+        Globals.NOTES.keys()[note_idx - Globals.SEMITONES],
+        central_note,
+        Globals.NOTES.keys()[note_idx + Globals.SEMITONES],
+    ]
 
     current_pitch = pitch
+    current_note = notes[pitch]
 
-    # var note_inst = note.instance()
+    # var note_inst = note_scene.instance()
     # $NotePath.add_child(note_inst)
-    # note_inst.set_note(pitch)
+    # note_inst.set_note(notes[pitch])

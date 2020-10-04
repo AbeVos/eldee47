@@ -5,11 +5,10 @@ signal send_assignments(group_key, assignment)
 const CultistResource = preload("res://scenes/Cultist.tscn")
 
 export var groups = {
-    0: [0, 1, 2],
-    1: [1, 3, 5],
-    2: [2, 4, 6],
+    0: ["A4", "C5", "B4"],
+    1: ["A5", "G5", "E6"],
+    2: ["A6", "A5", "A4"],
 }
-export var tones = ["C", "E", "G"]
 
 func _ready():
     hat_colors()
@@ -20,7 +19,7 @@ func _on_Metronome_timeout():
     var symbols = []
 
     for cultist in $Cultists.get_children():
-        symbols.append(cultist.get_pitch(true))
+        symbols.append(cultist.get_note())
 
     # Assign symbols to groups.
     var assignments = assign_symbols(symbols)
