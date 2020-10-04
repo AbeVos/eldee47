@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/vox_loop_03.wav-4f84ff47d20fd1a4720362a4e5170f52.sample"
+
+[deps]
+
+source_file="res://audio/vox_loop_03.wav"
+dest_files=[ "res://.import/vox_loop_03.wav-4f84ff47d20fd1a4720362a4e5170f52.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

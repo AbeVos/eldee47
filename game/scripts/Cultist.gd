@@ -1,6 +1,7 @@
 extends Spatial
 
 export(int) var n_notes = 3
+export(AudioStream) var voice
 
 var note = preload("res://scenes/Note.tscn")
 var current_pitch
@@ -12,6 +13,9 @@ func _ready():
     $Body.set_surface_material(0, mat)
 
     current_pitch = get_pitch(true)
+
+    assert(voice != null)
+    $Tones/Voice_1.stream = voice
 
     # TODO: Replace this with a signal emission.
     var target = get_parent().get_parent().get_parent().get_node("Target")
