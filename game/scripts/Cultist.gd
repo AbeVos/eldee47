@@ -38,6 +38,7 @@ func _process(delta):
 
     if $NotePath/Note.offset >= path_length:
         $NotePath/Note.offset = 0
+        $NotePath/Note/NoteParticle.restart()
 
 
 ###########
