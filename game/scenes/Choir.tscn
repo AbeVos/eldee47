@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/Choir.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Cultist.tscn" type="PackedScene" id=2]
+[ext_resource path="res://audio/vox_loop_04.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/vox_loop_03.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/vox_loop_02.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/vox_loop_05.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/vox_loop_06.wav" type="AudioStream" id=7]
+[ext_resource path="res://audio/vox_loop_07.wav" type="AudioStream" id=8]
 
 [node name="Choir" type="Spatial"]
 script = ExtResource( 1 )
@@ -11,19 +17,45 @@ __meta__ = {
 
 [node name="Cultists" type="Node" parent="."]
 
-[node name="Cultist" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( 0.832941, 0, 0.553363, 0, 1, 0, -0.553363, 0, 0.832941, -2.97199, 0, -4.19996 )
+[node name="Cultist_A4" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( 0.88537, 0, 0.464889, 0, 1, 0, -0.464889, 0, 0.88537, -3.62161, 0.00579929, -6.07265 )
 
-[node name="Cultist2" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( 0.710382, 0, -0.703816, 0, 1, 0, 0.703816, 0, 0.710382, 2.38572, 0, -4.7839 )
+[node name="Cultist_C5" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( 0.534219, 0, 0.845346, 0, 1, 0, -0.845346, 0, 0.534219, -6.74214, 0, -2.75376 )
+voice = ExtResource( 5 )
+central_note = "C5"
 
-[node name="Cultist3" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( -0.582847, 0, 0.812582, 0, 1, 0, -0.812582, 0, -0.582847, -3.3467, 0, -0.154545 )
+[node name="Cultist_E5" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.882357, 0, 0.47058, 0, 1, 0, -0.47058, 0, -0.882357, -3.70438, 0, 6.61486 )
+voice = ExtResource( 4 )
+central_note = "E5"
 
-[node name="Cultist4" parent="Cultists" instance=ExtResource( 2 )]
-transform = Transform( -0.872845, 0, -0.487997, 0, 1, 0, 0.487997, 0, -0.872845, 2.5108, -4.76837e-07, 1.00025 )
+[node name="Cultist_A5" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.560089, 0, -0.828432, 0, 1, 0, 0.828432, 0, -0.560089, 5.68674, -4.76837e-07, 4.64708 )
+voice = ExtResource( 3 )
+central_note = "A5"
+
+[node name="Cultist_C6" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.020942, 0, -0.99978, 0, 1, 0, 0.99978, 0, -0.020942, 7.33161, -4.76837e-07, 0.0125455 )
+voice = ExtResource( 6 )
+central_note = "C6"
+
+[node name="Cultist_E6" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.361218, 0, 0.932481, 0, 1, 0, -0.932481, 0, -0.361218, -6.84985, -4.76837e-07, 2.49097 )
+voice = ExtResource( 7 )
+central_note = "E6"
+
+[node name="Cultist_A6" parent="Cultists" instance=ExtResource( 2 )]
+transform = Transform( -0.949666, 0, -0.313264, 0, 1, 0, 0.313264, 0, -0.949666, 1.45231, -4.76837e-07, 7.13662 )
+voice = ExtResource( 8 )
+central_note = "A6"
 
 [node name="Metronome" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 2.0
 autostart = true
+
+[node name="CSGCylinder" type="CSGCylinder" parent="."]
+visible = false
+radius = 6.20486
+sides = 9
 [connection signal="timeout" from="Metronome" to="." method="_on_Metronome_timeout"]

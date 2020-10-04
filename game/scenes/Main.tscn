@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://materials/bloodMaterial.tres" type="Material" id=2]
+[ext_resource path="res://scenes/Choir.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CylinderMesh" id=1]
 
@@ -14,10 +15,14 @@ autostart = true
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 6.74, 5.959 )
+transform = Transform( 0.83504, 0.389043, -0.389043, 0, 0.707107, 0.707107, 0.550189, -0.590462, 0.590462, -5.7497, 6.74, 7.97318 )
 
 [node name="Bloodpool" type="CSGMesh" parent="."]
 transform = Transform( 6, 0, 0, 0, 0.032, 0, 0, 0, 6, 0, 0, 0 )
 mesh = SubResource( 1 )
 material = ExtResource( 2 )
+
+[node name="Choir" parent="." instance=ExtResource( 3 )]
 [connection signal="timeout" from="IncrementTimer" to="Monster" method="_on_IncrementTimer_timeout"]
+[connection signal="set_target" from="Monster" to="Choir" method="_on_Monster_set_target"]
+[connection signal="send_assignments" from="Choir" to="Monster" method="_on_Choir_send_assignments"]
