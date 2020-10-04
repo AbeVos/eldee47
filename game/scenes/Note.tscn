@@ -19,7 +19,7 @@ scale_curve = SubResource( 2 )
 [sub_resource type="QuadMesh" id=4]
 
 [node name="Note" type="PathFollow"]
-rotation_mode = 0
+rotation_mode = 4
 cubic_interp = false
 script = ExtResource( 2 )
 __meta__ = {
@@ -27,7 +27,7 @@ __meta__ = {
 }
 speed = 0.5
 altitude = 0.5
-frequency = 4
+frequency = 2
 
 [node name="NoteParticle" parent="." instance=ExtResource( 1 )]
 amount = 4

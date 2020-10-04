@@ -11,8 +11,9 @@ func _ready():
 
     current_pitch = get_pitch(true)
 
+    # TODO: Replace this with a signal emission.
     var target = get_parent().get_parent().get_parent().get_node("Target")
-    _on_Monster_set_target(target)
+    _on_Monster_set_target(null)
 
 
 func _process(_delta):
@@ -54,28 +55,42 @@ func _on_Right_released():
 
 
 func _on_Monster_set_target(spatial):
+    # Set the target spatial for sending particles towards.
+
     var start = get_global_transform().origin
-    var target = spatial.get_global_transform()
-    target = (global_transform.inverse() * target).origin
 
-    var center = 0.5 * (start + target)
+    var target
+    var center
+    var offset
+    var direction
 
-    # Get a vector pointing from start towards target.
-    var direction = (target - start).normalized()
+    if spatial == null:
+        target = 3 * Vector3.UP
+    else:
+        target = spatial.get_global_transform()
+        target = (global_transform.inverse() * target).origin
 
-    # Project the direction vector onto the XZ plane.
-    var projection = Vector3(direction.x, 0, -direction.z).normalized()
+        center = 0.5 * (start + target)
 
-    var offset = (direction).cross(projection).normalized()
+        # Get a vector pointing from start towards target.
+        direction = (target - start).normalized()
+
+        # Project the direction vector onto the XZ plane.
+        var projection = Vector3(direction.x, 0, -direction.z).normalized()
+
+        offset = (direction).cross(projection).normalized()
 
     var curve = $NotePath.get_curve().duplicate(true)
     curve.clear_points()
     curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
-    curve.add_point(
-        center + 2 * offset,
-        -direction,
-        direction
-    )
+
+    if spatial != null:
+        curve.add_point(
+            center + 2 * offset,
+            -direction,
+            direction
+        )
+
     curve.add_point(target, Vector3.ZERO, Vector3.ZERO)
     print(curve.get_baked_points())
 
