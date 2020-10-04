@@ -151,7 +151,3 @@ func sing(pitch):
 
     current_pitch = pitch
     current_note = notes[pitch]
-
-    # var note_inst = note_scene.instance()
-    # $NotePath.add_child(note_inst)
-    # note_inst.set_note(notes[pitch])
