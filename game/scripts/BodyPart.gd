@@ -1,16 +1,19 @@
-extends Spatial
+extends MeshInstance
 
 signal body_part_complete
 signal body_part_failed
 
-const PROGRESS_VALUE = 5
-const REGRESS_VALUE = 2
+export(Vector3) var hidden_pos = Vector3(0,-10,0)
+export(Vector3) var visible_pos = Vector3(0,0,0)
 
-onready var body_part_progress = 20
+const PROGRESS_VALUE = 6
+const REGRESS_VALUE = 1
+
+onready var body_part_progress = 30
 onready var is_active = true
 
 func _ready():
-    $Mesh.scale = Vector3($Mesh.scale.x, body_part_progress / 100.0, $Mesh.scale.z)
+    transform.origin = hidden_pos
 
 func increment_part():
     if (is_active):
@@ -36,10 +39,8 @@ func update_body_part():
 func _on_IncrementTimer_timeout():
     update_body_part()
 
-func _process(delta):
-    var last_scale = $Mesh.scale
-    var new_scale = Vector3(last_scale.x, body_part_progress / 100.0, last_scale.z)
-    $Mesh.scale = $Mesh.scale.linear_interpolate(new_scale, delta + 0.3)
-
-    if (Input.is_action_just_released("ui_accept")):
-        increment_part()
+func _process(_delta):
+    # var last_scale = $Mesh.scale
+    # var new_scale = Vector3(last_scale.x, body_part_progress / 100.0, last_scale.z)
+    # $Mesh.scale = $Mesh.scale.linear_interpolate(new_scale, delta + 0.3)
+    transform.origin = hidden_pos.linear_interpolate(visible_pos, body_part_progress/100.0)

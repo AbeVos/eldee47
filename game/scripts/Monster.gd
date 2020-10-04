@@ -22,7 +22,8 @@ func _on_Choir_send_assignments(group_key, assignment):
         emit_signal("set_target", cultist_idx, body_parts[group_key])
 
     if not null in assignment:
-        body_parts[group_key].increment_part()
+        if (is_active):
+            body_parts[group_key].increment_part()
 
 
 func _process(delta):
@@ -42,10 +43,9 @@ func _process(delta):
 
 
 func _on_IncrementTimer_timeout():
-    #$Head.update_body_part()
-    #$Claw_left.update_body_part()
-    #$Claw_right.update_body_part()
-    pass
+    $Head.update_body_part()
+    $Claw_left.update_body_part()
+    $Claw_right.update_body_part()
 
 
 func _on_Head_body_part_failed():
