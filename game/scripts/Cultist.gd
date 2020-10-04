@@ -143,7 +143,9 @@ func get_note():
 
 func sing(pitch):
     # Change pitch.
-    $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
+    # $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
+    $Voices.get_children()[current_pitch].stop()
+    $Voices.get_children()[pitch].play(SceneChanger.get_music_progress())
 
     var note_idx = Globals.NOTES.keys().find(central_note);
     assert(note_idx >= 0)

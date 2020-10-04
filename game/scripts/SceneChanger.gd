@@ -16,3 +16,7 @@ func change_scene(path, delay=0.5):
 
     animation_player.play_backwards("fade")
     emit_signal("scene_changed")
+
+
+func get_music_progress():
+    return $AudioTimer.wait_time - $AudioTimer.time_left
