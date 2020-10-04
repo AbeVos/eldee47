@@ -3,9 +3,9 @@
 [ext_resource path="res://models/MOD_Liquid.obj" type="ArrayMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0, 0.529412, 1, 1 )
+albedo_color = Color( 0.352941, 0.517647, 0.662745, 1 )
 emission_enabled = true
-emission = Color( 0, 0.529412, 1, 1 )
+emission = Color( 0.352941, 0.517647, 0.662745, 1 )
 emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
