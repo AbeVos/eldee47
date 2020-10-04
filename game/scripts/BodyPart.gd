@@ -31,7 +31,7 @@ func update_body_part():
         if (body_part_progress <= 0):
             emit_signal("body_part_failed")
             is_active = false
-            $Mesh.visible = false
+            visible = false
 
     #print("body_part_progress: ", body_part_progress)
 
