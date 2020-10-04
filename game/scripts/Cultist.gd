@@ -1,7 +1,12 @@
 extends Spatial
 
-export(int) var n_notes = 3
+export var notes = {
+    0: 0.749,
+    1: 1.0,
+    2: 1.335,
+}
 
+var n_notes
 var note = preload("res://scenes/Note.tscn")
 var current_pitch
 var uv_offset = Vector3(0, 0, 0)
@@ -10,6 +15,8 @@ var uv_offset = Vector3(0, 0, 0)
 func _ready():
     var mat = $Body.get_surface_material(0).duplicate(true)
     $Body.set_surface_material(0, mat)
+
+    n_notes = len(notes)
 
     current_pitch = get_pitch(true)
 
@@ -117,10 +124,9 @@ func get_pitch(quantize=false):
 
 
 func sing(pitch):
-    var tones = $Tones.get_children()
+    # Change pitch.
+    $Tones/Voice_1.pitch_scale = notes[pitch]
 
-    tones[current_pitch].stop()
-    tones[pitch].play(0.0)
     current_pitch = pitch
 
     var note_inst = note.instance()
