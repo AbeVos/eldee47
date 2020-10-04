@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/assets/Column.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/assets/StoneEdge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/assets/Floor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/assets/Liquid.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/assets/Cultist.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/assets/Demon_Claw_L.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/assets/Demon_Head.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/assets/Demon_Claw_R.tscn" type="PackedScene" id=8]
 
 [node name="Spatial" type="Spatial"]
 __meta__ = {
@@ -53,6 +57,13 @@ transform = Transform( -0.809017, 0, -0.587785, 0, 1, 0, 0.587785, 0, -0.809017,
 [node name="Column2" parent="RoomCenter" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.49608 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32972, 0.964041 )
-fov = 66.0
+[node name="Cultist" parent="." instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 1.00247 )
+
+[node name="Demon_Claw_L" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0 )
+
+[node name="Demon_Claw_R" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0 )
+
+[node name="Demon_Head" parent="." instance=ExtResource( 7 )]
