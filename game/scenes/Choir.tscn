@@ -17,32 +17,38 @@ __meta__ = {
 
 [node name="Cultists" type="Node" parent="."]
 
-[node name="Cultist" parent="Cultists" instance=ExtResource( 2 )]
+[node name="Cultist_A4" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( 0.88537, 0, 0.464889, 0, 1, 0, -0.464889, 0, 0.88537, -3.62161, 0.00579929, -6.07265 )
 
-[node name="Cultist2" parent="Cultists" instance=ExtResource( 2 )]
+[node name="Cultist_C5" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( 0.534219, 0, 0.845346, 0, 1, 0, -0.845346, 0, 0.534219, -6.74214, 0, -2.75376 )
 voice = ExtResource( 5 )
+central_note = "C5"
 
-[node name="Cultist3" parent="Cultists" instance=ExtResource( 2 )]
+[node name="Cultist_E5" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.882357, 0, 0.47058, 0, 1, 0, -0.47058, 0, -0.882357, -3.70438, 0, 6.61486 )
 voice = ExtResource( 4 )
+central_note = "E5"
 
-[node name="Cultist4" parent="Cultists" instance=ExtResource( 2 )]
+[node name="Cultist_A5" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.560089, 0, -0.828432, 0, 1, 0, 0.828432, 0, -0.560089, 5.68674, -4.76837e-07, 4.64708 )
 voice = ExtResource( 3 )
+central_note = "A5"
 
-[node name="Cultist5" parent="Cultists" instance=ExtResource( 2 )]
+[node name="Cultist_C6" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.020942, 0, -0.99978, 0, 1, 0, 0.99978, 0, -0.020942, 7.33161, -4.76837e-07, 0.0125455 )
 voice = ExtResource( 6 )
+central_note = "C6"
 
-[node name="Cultist6" parent="Cultists" instance=ExtResource( 2 )]
+[node name="Cultist_E6" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.361218, 0, 0.932481, 0, 1, 0, -0.932481, 0, -0.361218, -6.84985, -4.76837e-07, 2.49097 )
 voice = ExtResource( 7 )
+central_note = "E6"
 
-[node name="Cultist7" parent="Cultists" instance=ExtResource( 2 )]
+[node name="Cultist_A6" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.949666, 0, -0.313264, 0, 1, 0, 0.313264, 0, -0.949666, 1.45231, -4.76837e-07, 7.13662 )
 voice = ExtResource( 8 )
+central_note = "A6"
 
 [node name="Metronome" type="Timer" parent="."]
 wait_time = 2.0
