@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Arm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Cultist.gd" type="Script" id=2]
@@ -19,12 +19,6 @@ _data = {
 
 [sub_resource type="SpatialMaterial" id=5]
 flags_unshaded = true
-
-[sub_resource type="CubeMesh" id=6]
-
-[sub_resource type="CylinderMesh" id=7]
-
-[sub_resource type="SphereMesh" id=8]
 
 [node name="Cultist" type="Spatial"]
 script = ExtResource( 2 )
@@ -65,23 +59,6 @@ material/0 = SubResource( 5 )
 [node name="NoteTimer" type="Timer" parent="."]
 wait_time = 0.7
 autostart = true
-
-[node name="markers" type="Spatial" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="markers"]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
-mesh = SubResource( 6 )
-material/0 = null
-
-[node name="MeshInstance2" type="MeshInstance" parent="markers"]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
-mesh = SubResource( 7 )
-material/0 = null
-
-[node name="MeshInstance3" type="MeshInstance" parent="markers"]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
-mesh = SubResource( 8 )
-material/0 = null
 [connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
 [connection signal="released" from="Left" to="." method="_on_Left_released"]
 [connection signal="grabbed" from="Right" to="." method="_on_Right_grabbed"]
