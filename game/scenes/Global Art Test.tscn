@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/assets/Column.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/assets/StoneEdge.tscn" type="PackedScene" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://scenes/LightMap10.png" type="Texture" id=31]
 [ext_resource path="res://scenes/MOD_ColumnMesh10.png" type="Texture" id=32]
 [ext_resource path="res://scenes/MOD_ColumnMesh8.png" type="Texture" id=33]
+[ext_resource path="res://scenes/assets/SummoningCircle.tscn" type="PackedScene" id=34]
 
 [sub_resource type="GIProbeData" id=2]
 bounds = AABB( -3.33692, -1.34222, -3.60853, 6.67383, 2.68445, 7.21706 )
@@ -82,6 +83,9 @@ __meta__ = {
 }
 
 [node name="RoomCenter" type="Spatial" parent="."]
+
+[node name="SummoningCircle" parent="RoomCenter" instance=ExtResource( 34 )]
+transform = Transform( 0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, -0.0951746, 0 )
 
 [node name="Floor" parent="RoomCenter" instance=ExtResource( 3 )]
 
@@ -139,7 +143,7 @@ transform = Transform( 0.9402, -0.0980737, -0.326197, -0.163246, 0.710766, -0.68
 transform = Transform( 0.176249, -0.532217, -0.828059, 0.0391568, 0.844353, -0.534355, 0.983566, 0.0617551, 0.169656, -0.472937, -0.138294, 0.0801556 )
 
 [node name="Demon_Head" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 0.484886, 0.874577, 0, -0.874577, 0.484886, 2.98023e-08, -0.220534, 0.210655 )
+transform = Transform( 1, 0, 0, 0, 0.872043, 0.489428, 0, -0.489428, 0.872043, 2.98023e-08, -0.0570007, 0.253496 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 2.98023e-08, 1, 0, -1, 2.98023e-08, 0, 4.16522, 1.66364e-08 )
