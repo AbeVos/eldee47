@@ -4,7 +4,7 @@
 
 [resource]
 flags_transparent = true
-albedo_color = Color( 0, 0, 0, 1 )
+albedo_color = Color( 0, 0, 0, 0.982662 )
 albedo_texture = ExtResource( 1 )
 emission_enabled = true
 emission = Color( 0, 0, 0, 1 )
