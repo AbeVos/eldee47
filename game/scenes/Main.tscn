@@ -12,7 +12,7 @@
 autostart = true
 
 [node name="Monster" parent="." instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+transform = Transform( -0.642787, 0, -0.766045, 0, 1, 0, 0.766045, 0, -0.642787, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.83504, 0.389043, -0.389043, 0, 0.707107, 0.707107, 0.550189, -0.590462, 0.590462, -5.7497, 6.74, 7.97318 )
