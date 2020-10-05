@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://models/lambert2.material" type="Material" id=1]
 [ext_resource path="res://models/lambert1.material" type="Material" id=2]
 [ext_resource path="res://models/MAT_Cultist.material" type="Material" id=3]
 
@@ -25,7 +24,6 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97751,
 "index_count": 960,
-"material": ExtResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.0278798, 0.386211, 0.0239149, 0.0557596, 0.0533163, 0.0888413 ) ],
 "vertex_count": 194
@@ -71,6 +69,7 @@ bind/10/pose = Transform( 99.6979, 7.76867, 3.91697e-05, 7.76872, -99.6972, 0.00
 [sub_resource type="Animation" id=3]
 resource_name = "ArmatureTake 001BaseLayer"
 length = 5.04167
+loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Skeleton:joint_head")
 tracks/0/interp = 1
