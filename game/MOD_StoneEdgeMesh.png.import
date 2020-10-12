@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/LightMap8.png-e3afdd9deb9791407a9b0e6eafcc1a19.s3tc.stex"
-path.etc2="res://.import/LightMap8.png-e3afdd9deb9791407a9b0e6eafcc1a19.etc2.stex"
+path.s3tc="res://.import/MOD_StoneEdgeMesh.png-c583ead07a291f7ecddbf9fe44f02e0d.s3tc.stex"
+path.etc2="res://.import/MOD_StoneEdgeMesh.png-c583ead07a291f7ecddbf9fe44f02e0d.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/LightMap8.png"
-dest_files=[ "res://.import/LightMap8.png-e3afdd9deb9791407a9b0e6eafcc1a19.s3tc.stex", "res://.import/LightMap8.png-e3afdd9deb9791407a9b0e6eafcc1a19.etc2.stex" ]
+source_file="res://MOD_StoneEdgeMesh.png"
+dest_files=[ "res://.import/MOD_StoneEdgeMesh.png-c583ead07a291f7ecddbf9fe44f02e0d.s3tc.stex", "res://.import/MOD_StoneEdgeMesh.png-c583ead07a291f7ecddbf9fe44f02e0d.etc2.stex" ]
 
 [params]
 

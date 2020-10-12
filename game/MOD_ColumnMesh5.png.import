@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/MOD_StoneEdgeMesh2.png-b11301bf08e26f032d14c31282406d7f.s3tc.stex"
-path.etc2="res://.import/MOD_StoneEdgeMesh2.png-b11301bf08e26f032d14c31282406d7f.etc2.stex"
+path.s3tc="res://.import/MOD_ColumnMesh5.png-d742f3d17618cc80d80d0e0632f8c7f6.s3tc.stex"
+path.etc2="res://.import/MOD_ColumnMesh5.png-d742f3d17618cc80d80d0e0632f8c7f6.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/MOD_StoneEdgeMesh2.png"
-dest_files=[ "res://.import/MOD_StoneEdgeMesh2.png-b11301bf08e26f032d14c31282406d7f.s3tc.stex", "res://.import/MOD_StoneEdgeMesh2.png-b11301bf08e26f032d14c31282406d7f.etc2.stex" ]
+source_file="res://MOD_ColumnMesh5.png"
+dest_files=[ "res://.import/MOD_ColumnMesh5.png-d742f3d17618cc80d80d0e0632f8c7f6.s3tc.stex", "res://.import/MOD_ColumnMesh5.png-d742f3d17618cc80d80d0e0632f8c7f6.etc2.stex" ]
 
 [params]
 

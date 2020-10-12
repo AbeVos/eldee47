@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/LightMap12.png-9e3b4373dc4855b150e4d9b61cc8d773.s3tc.stex"
-path.etc2="res://.import/LightMap12.png-9e3b4373dc4855b150e4d9b61cc8d773.etc2.stex"
+path.s3tc="res://.import/MOD_ColumnMesh10.png-792c75e435a5025f4c6333945511e440.s3tc.stex"
+path.etc2="res://.import/MOD_ColumnMesh10.png-792c75e435a5025f4c6333945511e440.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/LightMap12.png"
-dest_files=[ "res://.import/LightMap12.png-9e3b4373dc4855b150e4d9b61cc8d773.s3tc.stex", "res://.import/LightMap12.png-9e3b4373dc4855b150e4d9b61cc8d773.etc2.stex" ]
+source_file="res://MOD_ColumnMesh10.png"
+dest_files=[ "res://.import/MOD_ColumnMesh10.png-792c75e435a5025f4c6333945511e440.s3tc.stex", "res://.import/MOD_ColumnMesh10.png-792c75e435a5025f4c6333945511e440.etc2.stex" ]
 
 [params]
 

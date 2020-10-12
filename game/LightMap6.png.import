@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/LightMap11.png-299f74ecdaf1674ab71d20711d89afbb.s3tc.stex"
-path.etc2="res://.import/LightMap11.png-299f74ecdaf1674ab71d20711d89afbb.etc2.stex"
+path.s3tc="res://.import/LightMap6.png-785f02de55cf406fa1212b99715f5c2c.s3tc.stex"
+path.etc2="res://.import/LightMap6.png-785f02de55cf406fa1212b99715f5c2c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/LightMap11.png"
-dest_files=[ "res://.import/LightMap11.png-299f74ecdaf1674ab71d20711d89afbb.s3tc.stex", "res://.import/LightMap11.png-299f74ecdaf1674ab71d20711d89afbb.etc2.stex" ]
+source_file="res://LightMap6.png"
+dest_files=[ "res://.import/LightMap6.png-785f02de55cf406fa1212b99715f5c2c.s3tc.stex", "res://.import/LightMap6.png-785f02de55cf406fa1212b99715f5c2c.etc2.stex" ]
 
 [params]
 

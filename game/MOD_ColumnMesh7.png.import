@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/MOD_ColumnMesh3.png-f7d9b64a2e1962b5417ea5d0b6876cd9.s3tc.stex"
-path.etc2="res://.import/MOD_ColumnMesh3.png-f7d9b64a2e1962b5417ea5d0b6876cd9.etc2.stex"
+path.s3tc="res://.import/MOD_ColumnMesh7.png-92889df09f0178a330445fd24c3e9729.s3tc.stex"
+path.etc2="res://.import/MOD_ColumnMesh7.png-92889df09f0178a330445fd24c3e9729.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/MOD_ColumnMesh3.png"
-dest_files=[ "res://.import/MOD_ColumnMesh3.png-f7d9b64a2e1962b5417ea5d0b6876cd9.s3tc.stex", "res://.import/MOD_ColumnMesh3.png-f7d9b64a2e1962b5417ea5d0b6876cd9.etc2.stex" ]
+source_file="res://MOD_ColumnMesh7.png"
+dest_files=[ "res://.import/MOD_ColumnMesh7.png-92889df09f0178a330445fd24c3e9729.s3tc.stex", "res://.import/MOD_ColumnMesh7.png-92889df09f0178a330445fd24c3e9729.etc2.stex" ]
 
 [params]
 
