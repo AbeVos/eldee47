@@ -8,5 +8,6 @@
 [node name="MOD_DemonClaw_L" type="MeshInstance" parent="."]
 transform = Transform( -0.01, 0, 0, 0, 0.01, -8.74228e-10, 0, 8.74228e-10, 0.01, 0, 0, 0 )
 material_override = ExtResource( 2 )
+cast_shadow = 0
 mesh = ExtResource( 1 )
 material/0 = null
