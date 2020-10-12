@@ -59,8 +59,4 @@ material/0 = SubResource( 5 )
 [node name="NoteTimer" type="Timer" parent="."]
 wait_time = 0.7
 autostart = true
-[connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
-[connection signal="released" from="Left" to="." method="_on_Left_released"]
-[connection signal="grabbed" from="Right" to="." method="_on_Right_grabbed"]
-[connection signal="released" from="Right" to="." method="_on_Right_released"]
 [connection signal="timeout" from="NoteTimer" to="." method="_on_NoteTimer_timeout"]

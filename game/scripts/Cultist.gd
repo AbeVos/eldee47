@@ -7,7 +7,8 @@ var note_scene = preload("res://scenes/Note.tscn")
 var current_pitch
 var current_note
 var uv_offset = Vector3(0, 0, 0)
-
+var viewport
+var camera
 
 func _ready():
     var mat = $Body.get_surface_material(0).duplicate(true)
@@ -27,19 +28,32 @@ func _ready():
     $NotePath.add_child(note_inst)
     note_inst.set_note(central_note)
 
+    viewport = get_viewport()
+    camera = viewport.get_camera()
+
     # var target = get_parent().get_parent().get_parent().get_node("Target")
     # set_symbol_target(target)
 
 
 func _process(_delta):
-    if $Right.locked:
-        var position = $Left/Hand.transform.origin
-        position.x *= -1
-        $Right/Hand.transform.origin = position
-    elif $Left.locked:
-        var position = $Right/Hand.transform.origin
-        position.x *= -1
-        $Left/Hand.transform.origin = position
+    var transform = get_global_transform()
+    var up = transform * Vector3.UP;
+    var screen_pos = normalize_screen_space(
+        camera.unproject_position(transform.origin),
+        viewport.get_visible_rect().size
+    )
+    var screen_top = normalize_screen_space(
+        camera.unproject_position(up),
+        viewport.get_visible_rect().size
+    )
+    var screen_dir = (screen_top - screen_pos).normalized();
+    var mouse_pos = normalize_screen_space(
+        viewport.get_mouse_position(),
+        viewport.get_visible_rect().size
+    )
+    var mouse_distance = mouse_pos.distance_to(screen_pos);
+    var mouse_dir = (screen_pos - mouse_pos).normalized();
+    var dot = mouse_dir.dot(screen_dir);
 
     var mat = $Body.get_surface_material(0)
     mat.albedo_color = Color(
@@ -77,6 +91,11 @@ func _on_NoteTimer_timeout():
     var note_inst = note_scene.instance()
     $NotePath.add_child(note_inst)
     note_inst.set_note(current_note)
+
+
+func normalize_screen_space(point, rect):
+    var axis = max(rect.x, rect.y)
+    return point / axis
 
 
 func set_symbol_target(spatial):
@@ -130,10 +149,30 @@ func get_pitch(quantize=false):
     # If quantize is true, the pitch will be an integer
     # in {0, ..., N_PITCHES - 1}, otherwise it will be a real number in
     # [0, 1].
+    var transform = get_global_transform()
+    var up = transform * Vector3.UP;
+    var screen_pos = normalize_screen_space(
+        camera.unproject_position(transform.origin),
+        viewport.get_visible_rect().size
+    )
+    var screen_top = normalize_screen_space(
+        camera.unproject_position(up),
+        viewport.get_visible_rect().size
+    )
+    var screen_dir = (screen_top - screen_pos).normalized();
+    var mouse_pos = normalize_screen_space(
+        viewport.get_mouse_position(),
+        viewport.get_visible_rect().size
+    )
+    var mouse_distance = mouse_pos.distance_to(screen_pos);
+    var mouse_dir = (screen_pos - mouse_pos).normalized();
+    var dot = -screen_dir.dot(mouse_dir);
+    dot = 0.5 * (dot + 1)
+
     if not quantize:
-        return ($Left.value + $Right.value) / 2
+        return dot
     else:
-        var value = get_pitch(false) * (Globals.N_PITCHES - 1)
+        var value = dot * (Globals.N_PITCHES - 1)
         return int(round(value))
 
 
