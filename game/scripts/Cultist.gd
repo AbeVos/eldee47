@@ -11,6 +11,9 @@ var viewport
 var camera
 var pitch_value = 0.5
 
+var mouse_over = false
+var dragging = false
+
 func _ready():
     var mat = $Body.get_surface_material(0).duplicate(true)
     $Body.set_surface_material(0, mat)
@@ -37,27 +40,28 @@ func _ready():
 
 
 func _process(_delta):
-    var transform = get_global_transform()
-    var up = transform * Vector3.UP;
-    var screen_pos = normalize_screen_space(
-        camera.unproject_position(transform.origin),
-        viewport.get_visible_rect().size
-    )
-    var screen_top = normalize_screen_space(
-        camera.unproject_position(up),
-        viewport.get_visible_rect().size
-    )
-    var screen_dir = (screen_top - screen_pos).normalized();
-    var mouse_pos = normalize_screen_space(
-        viewport.get_mouse_position(),
-        viewport.get_visible_rect().size
-    )
-    var mouse_distance = mouse_pos.distance_to(screen_pos);
-    var mouse_dir = (screen_pos - mouse_pos).normalized();
-    var dot = -mouse_dir.dot(screen_dir);
+    if dragging:
+        var transform = get_global_transform()
+        var up = transform * Vector3.UP;
+        var screen_pos = normalize_screen_space(
+            camera.unproject_position(transform.origin),
+            viewport.get_visible_rect().size
+        )
+        var screen_top = normalize_screen_space(
+            camera.unproject_position(up),
+            viewport.get_visible_rect().size
+        )
+        var screen_dir = (screen_top - screen_pos).normalized();
+        var mouse_pos = normalize_screen_space(
+            viewport.get_mouse_position(),
+            viewport.get_visible_rect().size
+        )
+        var mouse_distance = mouse_pos.distance_to(screen_pos);
+        var mouse_dir = (screen_pos - mouse_pos).normalized();
+        var dot = -mouse_dir.dot(screen_dir);
 
-    if mouse_distance <= 0.1:
-        pitch_value = 0.5 * (dot + 1)
+        if mouse_distance <= 0.1:
+            pitch_value = 0.5 * (dot + 1)
 
     var mat = $Body.get_surface_material(0)
     mat.albedo_color = Color(
@@ -70,6 +74,11 @@ func _process(_delta):
     if pitch != current_pitch:
         # Pitch has changed.
         sing(pitch)
+
+
+func _input(event):
+    if event is InputEventMouseButton:
+        dragging = mouse_over and event.is_pressed()
 
 
 ###########
@@ -100,14 +109,19 @@ func _on_NoteTimer_timeout():
 func _on_Area_input_event(
     camera, event, click_position, click_normal, shape_idx
 ):
-    print("event")
     if event is InputEventMouseButton:
-        print("Click")
+        if event.is_pressed():
+            print("Click")
+        else:
+            print("Unclick")
 
 
 func _on_Area_mouse_entered():
-    print("Mouse enter")
-    pass # Replace with function body.
+    mouse_over = true
+
+
+func _on_Area_mouse_exited():
+    mouse_over = false
 
 
 func normalize_screen_space(point, rect):
