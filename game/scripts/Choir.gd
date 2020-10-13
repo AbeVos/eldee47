@@ -28,8 +28,8 @@ func _on_Metronome_timeout():
     for group_key in groups:
         emit_signal("send_assignments", group_key, assignments[group_key])
 
-    print("symbols: ", symbols)
-    print("assignments: ", assignments)
+    # print("symbols: ", symbols)
+    # print("assignments: ", assignments)
 
 
 func _on_Monster_set_target(cultist_index, target):

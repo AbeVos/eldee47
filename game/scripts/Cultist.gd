@@ -9,6 +9,7 @@ var current_note
 var uv_offset = Vector3(0, 0, 0)
 var viewport
 var camera
+var pitch_value = 0.5
 
 func _ready():
     var mat = $Body.get_surface_material(0).duplicate(true)
@@ -53,7 +54,10 @@ func _process(_delta):
     )
     var mouse_distance = mouse_pos.distance_to(screen_pos);
     var mouse_dir = (screen_pos - mouse_pos).normalized();
-    var dot = mouse_dir.dot(screen_dir);
+    var dot = -mouse_dir.dot(screen_dir);
+
+    if mouse_distance <= 0.1:
+        pitch_value = 0.5 * (dot + 1)
 
     var mat = $Body.get_surface_material(0)
     mat.albedo_color = Color(
@@ -93,6 +97,19 @@ func _on_NoteTimer_timeout():
     note_inst.set_note(current_note)
 
 
+func _on_Area_input_event(
+    camera, event, click_position, click_normal, shape_idx
+):
+    print("event")
+    if event is InputEventMouseButton:
+        print("Click")
+
+
+func _on_Area_mouse_entered():
+    print("Mouse enter")
+    pass # Replace with function body.
+
+
 func normalize_screen_space(point, rect):
     var axis = max(rect.x, rect.y)
     return point / axis
@@ -100,7 +117,7 @@ func normalize_screen_space(point, rect):
 
 func set_symbol_target(spatial):
     # Set the target spatial for sending particles towards.
-    print("Set target to %s" % spatial)
+    # print("Set target to %s" % spatial)
 
     var start = get_global_transform().origin
 
@@ -149,30 +166,10 @@ func get_pitch(quantize=false):
     # If quantize is true, the pitch will be an integer
     # in {0, ..., N_PITCHES - 1}, otherwise it will be a real number in
     # [0, 1].
-    var transform = get_global_transform()
-    var up = transform * Vector3.UP;
-    var screen_pos = normalize_screen_space(
-        camera.unproject_position(transform.origin),
-        viewport.get_visible_rect().size
-    )
-    var screen_top = normalize_screen_space(
-        camera.unproject_position(up),
-        viewport.get_visible_rect().size
-    )
-    var screen_dir = (screen_top - screen_pos).normalized();
-    var mouse_pos = normalize_screen_space(
-        viewport.get_mouse_position(),
-        viewport.get_visible_rect().size
-    )
-    var mouse_distance = mouse_pos.distance_to(screen_pos);
-    var mouse_dir = (screen_pos - mouse_pos).normalized();
-    var dot = -screen_dir.dot(mouse_dir);
-    dot = 0.5 * (dot + 1)
-
     if not quantize:
-        return dot
+        return pitch_value
     else:
-        var value = dot * (Globals.N_PITCHES - 1)
+        var value = pitch_value * (Globals.N_PITCHES - 1)
         return int(round(value))
 
 
