@@ -62,8 +62,16 @@ func _process(delta):
     var position = get_global_transform().origin
     var elevation = 2 * pitch_value - 1
 
-    $Left.global_transform.origin.y = position.y + elevation
-    $Right.global_transform.origin.y = position.y + elevation
+    $Left.global_transform.origin.y = lerp(
+        $Left.global_transform.origin.y,
+        position.y + elevation,
+        5 * delta
+    )
+    $Right.global_transform.origin.y = lerp(
+        $Right.global_transform.origin.y,
+        position.y + elevation,
+        5 * delta
+    )
 
     var mat = $Body.get_surface_material(0)
     mat.albedo_color = Color(
@@ -187,7 +195,12 @@ func get_note():
     return current_note
 
 
+func lerp(a, b, t):
+    return (1 - t) * a + t * b
+
+
 func sing(pitch):
+    print(pitch)
     # Change pitch.
     $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
 
