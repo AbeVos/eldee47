@@ -9,7 +9,9 @@ var current_note
 var uv_offset = Vector3(0, 0, 0)
 var viewport
 var camera
+var raw_pitch_value = 0
 var pitch_value = 0.5
+var old_pitch_value = 0
 
 var mouse_over = false
 var dragging = false
@@ -39,29 +41,29 @@ func _ready():
     # set_symbol_target(target)
 
 
-func _process(_delta):
-    if dragging:
-        var transform = get_global_transform()
-        var up = transform * Vector3.UP;
-        var screen_pos = normalize_screen_space(
-            camera.unproject_position(transform.origin),
-            viewport.get_visible_rect().size
-        )
-        var screen_top = normalize_screen_space(
-            camera.unproject_position(up),
-            viewport.get_visible_rect().size
-        )
-        var screen_dir = (screen_top - screen_pos).normalized();
-        var mouse_pos = normalize_screen_space(
-            viewport.get_mouse_position(),
-            viewport.get_visible_rect().size
-        )
-        var mouse_distance = mouse_pos.distance_to(screen_pos);
-        var mouse_dir = (screen_pos - mouse_pos).normalized();
-        var dot = -mouse_dir.dot(screen_dir);
+func _process(delta):
+    var screen_dir = get_screen_dir()
+    var sensitivity = 1.0 / screen_dir.length()
+    screen_dir = screen_dir.normalized()
 
-        if mouse_distance <= 0.1:
-            pitch_value = 0.5 * (dot + 1)
+    var mouse_pos = normalize_screen_space(
+        viewport.get_mouse_position(),
+        viewport.get_visible_rect().size
+    )
+    var mouse_dir = sensitivity * (get_screen_pos() - mouse_pos);
+    var dot = -mouse_dir.dot(screen_dir);
+
+    if dragging:
+        raw_pitch_value += (dot - old_pitch_value)
+
+    old_pitch_value = dot
+    pitch_value = clamp(0.5 * (raw_pitch_value + 1), 0 ,1)
+
+    var position = get_global_transform().origin
+    var elevation = 2 * pitch_value - 1
+
+    $Left.global_transform.origin.y = position.y + elevation
+    $Right.global_transform.origin.y = position.y + elevation
 
     var mat = $Body.get_surface_material(0)
     mat.albedo_color = Color(
@@ -84,36 +86,10 @@ func _input(event):
 ###########
 # Signals #
 ###########
-func _on_Left_grabbed():
-    $Right.locked = true
-
-
-func _on_Right_grabbed():
-    $Left.locked = true
-
-
-func _on_Left_released():
-    $Right.locked = false
-
-
-func _on_Right_released():
-    $Left.locked = false
-
-
 func _on_NoteTimer_timeout():
     var note_inst = note_scene.instance()
     $NotePath.add_child(note_inst)
     note_inst.set_note(current_note)
-
-
-func _on_Area_input_event(
-    camera, event, click_position, click_normal, shape_idx
-):
-    if event is InputEventMouseButton:
-        if event.is_pressed():
-            print("Click")
-        else:
-            print("Unclick")
 
 
 func _on_Area_mouse_entered():
@@ -185,6 +161,26 @@ func get_pitch(quantize=false):
     else:
         var value = pitch_value * (Globals.N_PITCHES - 1)
         return int(round(value))
+
+
+func get_screen_pos():
+    # Get this object's current position projected on the view.
+    return normalize_screen_space(
+        camera.unproject_position(transform.origin),
+        viewport.get_visible_rect().size
+    )
+
+
+func get_screen_dir():
+    # Get this objects vertical axis projected on the view.
+    var transform = get_global_transform()
+    var up = transform * Vector3.UP;
+    var screen_pos = get_screen_pos()
+    var screen_top = normalize_screen_space(
+        camera.unproject_position(up),
+        viewport.get_visible_rect().size
+    )
+    return screen_top - screen_pos
 
 
 func get_note():

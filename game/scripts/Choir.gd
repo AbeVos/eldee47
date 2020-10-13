@@ -33,7 +33,6 @@ func _on_Metronome_timeout():
 
 
 func _on_Monster_set_target(cultist_index, target):
-    print("AAAHHH")
     $Cultists.get_children()[cultist_index].set_symbol_target(target)
 
 

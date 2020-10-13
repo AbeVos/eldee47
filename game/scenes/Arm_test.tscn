@@ -6,10 +6,9 @@
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2823, 0 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.277281, 0.960789, 0, -0.960789, 0.277281, -0.383487, 10.3607, 3.92503 )
-current = true
-
-[node name="Choir" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.967157, 0.190208, -0.168607, 0, 0.663339, 0.748319, 0.25418, -0.723742, 0.641553, -2.61933, 8.05353, 9.82763 )
 
 [node name="Target" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211253, 3.46262, 0.161536 )
+
+[node name="Choir" parent="." instance=ExtResource( 1 )]
