@@ -65,12 +65,12 @@ func _process(delta):
     $Left.global_transform.origin.y = lerp(
         $Left.global_transform.origin.y,
         position.y + elevation,
-        5 * delta
+        10 * delta
     )
     $Right.global_transform.origin.y = lerp(
         $Right.global_transform.origin.y,
         position.y + elevation,
-        5 * delta
+        10 * delta
     )
 
     var mat = $Body.get_surface_material(0)
