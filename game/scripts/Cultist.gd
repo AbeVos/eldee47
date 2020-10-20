@@ -27,6 +27,9 @@ func _ready():
     $NotePath.add_child(note_inst)
     note_inst.set_note(central_note)
 
+    # var target = get_parent().get_parent().get_parent().get_node("Target")
+    # set_symbol_target(target)
+
 
 func _process(_delta):
     if $Right.locked:
@@ -93,25 +96,28 @@ func set_symbol_target(spatial):
         target = spatial.get_global_transform()
         target = (global_transform.inverse() * target).origin
 
-        center = 0.5 * (start + target)
+        center = 0.5 * target  # Average of target and zero vector.
 
         # Get a vector pointing from start towards target.
         direction = (target - start).normalized()
 
         # Project the direction vector onto the XZ plane.
-        var projection = Vector3(direction.x, 0, -direction.z).normalized()
+        var projection = Vector3(direction.x, 0, -direction.z)
 
         offset = (direction).cross(projection).normalized()
+        offset *= sign(offset.y)
 
     var curve = $NotePath.get_curve().duplicate(true)
     curve.clear_points()
     curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
 
     if spatial != null:
+        var magnitude = 0.5 * center.length()
+
         curve.add_point(
-            center + 2 * offset,
-            -direction,
-            direction
+            center + magnitude * offset,
+            - magnitude * direction,
+            magnitude * direction
         )
 
     curve.add_point(target, Vector3.ZERO, Vector3.ZERO)

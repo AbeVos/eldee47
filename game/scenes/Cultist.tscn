@@ -57,7 +57,7 @@ mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
 
 [node name="NoteTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.7
 autostart = true
 [connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
 [connection signal="released" from="Left" to="." method="_on_Left_released"]
