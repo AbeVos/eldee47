@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Arm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Cultist.gd" type="Script" id=2]
@@ -8,6 +8,10 @@
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
+
+[sub_resource type="CapsuleShape" id=6]
+radius = 0.524656
+height = 1.40832
 
 [sub_resource type="Curve3D" id=3]
 _data = {
@@ -22,9 +26,6 @@ flags_unshaded = true
 
 [node name="Cultist" type="Spatial"]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 voice = ExtResource( 3 )
 
 [node name="Left" parent="." instance=ExtResource( 1 )]
@@ -38,6 +39,13 @@ transform = Transform( 0.5, 0, 0, 0, -8.14603e-08, -0.8, 0, 0.5, -1.30337e-07, 0
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
+[node name="Area" type="Area" parent="Body"]
+transform = Transform( 2, 0, 0, 0, -3.25843e-07, 2, 0, -1.25, -2.03651e-07, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Body/Area"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 6 )
+
 [node name="Tones" type="Spatial" parent="."]
 
 [node name="Voice_1" type="AudioStreamPlayer3D" parent="Tones"]
@@ -49,8 +57,6 @@ curve = SubResource( 3 )
 
 [node name="Note" parent="NotePath" instance=ExtResource( 6 )]
 
-[node name="Tones" type="Spatial" parent="."]
-
 [node name="Hat" type="MeshInstance" parent="."]
 transform = Transform( 0.259723, 0, 0, 0, 0.259723, 0, 0, 0, 0.259723, 0.00508595, 1.36917, 0.0019474 )
 mesh = SubResource( 4 )
@@ -59,8 +65,6 @@ material/0 = SubResource( 5 )
 [node name="NoteTimer" type="Timer" parent="."]
 wait_time = 0.7
 autostart = true
-[connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
-[connection signal="released" from="Left" to="." method="_on_Left_released"]
-[connection signal="grabbed" from="Right" to="." method="_on_Right_grabbed"]
-[connection signal="released" from="Right" to="." method="_on_Right_released"]
+[connection signal="mouse_entered" from="Body/Area" to="." method="_on_Area_mouse_entered"]
+[connection signal="mouse_exited" from="Body/Area" to="." method="_on_Area_mouse_exited"]
 [connection signal="timeout" from="NoteTimer" to="." method="_on_NoteTimer_timeout"]

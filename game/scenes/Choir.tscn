@@ -15,7 +15,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Cultists" type="Node" parent="."]
+[node name="Cultists" type="Spatial" parent="."]
 
 [node name="Cultist_A4" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( 0.88537, 0, 0.464889, 0, 1, 0, -0.464889, 0, 0.88537, -3.62161, 0.00579929, -6.07265 )
@@ -53,9 +53,4 @@ central_note = "A6"
 [node name="Metronome" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-
-[node name="CSGCylinder" type="CSGCylinder" parent="."]
-visible = false
-radius = 6.20486
-sides = 9
 [connection signal="timeout" from="Metronome" to="." method="_on_Metronome_timeout"]
