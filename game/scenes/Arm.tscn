@@ -1,14 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scripts/Arm.gd" type="Script" id=1]
+[sub_resource type="SphereMesh" id=1]
 
-[sub_resource type="SphereMesh" id=3]
-
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=2]
 vertex_color_use_as_albedo = true
 
 [node name="Arm" type="Spatial"]
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -17,5 +14,5 @@ __meta__ = {
 
 [node name="Highlight" type="MeshInstance" parent="Hand"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
