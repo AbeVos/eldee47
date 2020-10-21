@@ -151,7 +151,6 @@ tracks/10/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 5.04167, 1, 
 
 [node name="Cultist_model" type="Spatial"]
 script = ExtResource( 1 )
-raised_val = 1.0
 
 [node name="Skeleton" type="Skeleton" parent="."]
 transform = Transform( 0.01, 0, 0, 0, -4.37114e-10, -0.01, 0, 0.01, -4.37114e-10, 0, 0, 0 )
@@ -222,6 +221,3 @@ material/1 = null
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "ArmatureTake 001BaseLayer"
 "anims/ArmatureTake 001BaseLayer" = SubResource( 3 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.991689, 0.128657, 0, -0.128657, 0.991689, -0.000313759, 0.376875, 0.791609 )
