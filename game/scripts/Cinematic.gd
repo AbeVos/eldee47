@@ -1,5 +1,6 @@
 extends Control
 
+export(String, FILE, "*.tscn,*.scn") var scene_to_load = "res://scenes/Main.tscn"
 export(float) var scrollspeed = 10
 export(float) var fadespeed = 0.7
 
@@ -19,4 +20,4 @@ func _process(delta):
 
     if (bottom <= 0 && !is_done):
         is_done = true
-        SceneChanger.change_scene("res://scenes/Intro.tscn", fadespeed)
+        SceneChanger.change_scene(scene_to_load, fadespeed)
