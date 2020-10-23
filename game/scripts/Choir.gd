@@ -10,7 +10,12 @@ export var groups = {
     2: ["A6", "A5", "A4"],
 }
 
+var selected_cultist = null
+
 func _ready():
+    for cultist in self.get_node("Cultists").get_children():
+        cultist.connect("grab", self, "_on_grab")
+        cultist.connect("release", self, "_on_release")
     hat_colors()
 
 
@@ -90,3 +95,12 @@ func hat_colors():
         var mat = hat.get_surface_material(0).duplicate(true)
         mat.albedo_color = colors[i]
         hat.set_surface_material(0, mat)
+
+
+func _on_grab(cultist):
+    print("Grab" + cultist.get_name())
+    selected_cultist = cultist
+
+func _on_release(cultist):
+    print("Release" + cultist.get_name())
+    selected_cultist = null

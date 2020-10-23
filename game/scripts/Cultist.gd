@@ -3,6 +3,9 @@ extends Spatial
 export(AudioStream) var voice
 export(String) var central_note = "A4"
 
+signal grab(cultist)
+signal release(cultist)
+
 var note_scene = preload("res://scenes/Note.tscn")
 var current_pitch
 var current_note
@@ -88,8 +91,13 @@ func _process(delta):
 
 func _input(event):
     if event is InputEventMouseButton:
-        dragging = mouse_over and event.is_pressed()
-
+        var start_dragging = mouse_over and event.is_pressed()
+        if start_dragging and not dragging:
+            emit_signal("grab", self)
+            dragging = true
+        elif not start_dragging and dragging:
+            emit_signal("release", self)
+            dragging = false
 
 ###########
 # Signals #
