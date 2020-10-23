@@ -20,8 +20,8 @@ var mouse_over = false
 var dragging = false
 
 func _ready():
-    var mat = $Body.get_surface_material(0).duplicate(true)
-    $Body.set_surface_material(0, mat)
+    var mat = $Cultist_model/Skeleton/MOD_Cultist.material_override.duplicate(true)
+    $Cultist_model/Skeleton/MOD_Cultist.material_override = mat
 
     current_pitch = null
     current_note = null
@@ -44,7 +44,7 @@ func _ready():
     # set_symbol_target(target)
 
 
-func _process(delta):
+func _process(_delta):
     var screen_dir = get_screen_dir()
     var sensitivity = 1.0 / screen_dir.length()
     screen_dir = screen_dir.normalized()
@@ -62,25 +62,15 @@ func _process(delta):
     old_pitch_value = dot
     pitch_value = clamp(0.5 * (raw_pitch_value + 1), 0 ,1)
 
-    var position = get_global_transform().origin
+    # var position = get_global_transform().origin
     var elevation = 2 * pitch_value - 1
 
-    $Left.global_transform.origin.y = lerp(
-        $Left.global_transform.origin.y,
-        position.y + elevation,
-        10 * delta
-    )
-    $Right.global_transform.origin.y = lerp(
-        $Right.global_transform.origin.y,
-        position.y + elevation,
-        10 * delta
-    )
+    $Cultist_model.raised_val = elevation
 
-    var mat = $Body.get_surface_material(0)
-    mat.albedo_color = Color(
-        1, float(get_pitch(true)) / (Globals.N_PITCHES - 1), 0
-    )
-    $Body.set_surface_material(0, mat)
+    # make those bois a color
+    var mat = $Cultist_model/Skeleton/MOD_Cultist.material_override
+    mat.albedo_color = Color(1, float(get_pitch(true)) / (Globals.N_PITCHES - 1), 0)
+    $Cultist_model/Skeleton/MOD_Cultist.material_override = mat
 
     var pitch = get_pitch(true)
 
