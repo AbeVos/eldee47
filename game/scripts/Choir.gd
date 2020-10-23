@@ -11,6 +11,7 @@ export var groups = {
 }
 
 var selected_cultist = null
+var light_energy = 3
 
 func _ready():
     for cultist in self.get_node("Cultists").get_children():
@@ -99,8 +100,12 @@ func hat_colors():
 
 func _on_grab(cultist):
     print("Grab" + cultist.get_name())
-    selected_cultist = cultist
+
+    for member in get_node("Cultists").get_children():
+        member.set_selected(member == cultist)
+
 
 func _on_release(cultist):
     print("Release" + cultist.get_name())
-    selected_cultist = null
+    for member in get_node("Cultists").get_children():
+        member.set_selected(null)

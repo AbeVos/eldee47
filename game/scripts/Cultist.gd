@@ -19,6 +19,9 @@ var old_pitch_value = 0
 var mouse_over = false
 var dragging = false
 
+var light_energy = 1
+var selected = null
+
 func _ready():
     var mat = $Cultist_model/Skeleton/MOD_Cultist.material_override.duplicate(true)
     $Cultist_model/Skeleton/MOD_Cultist.material_override = mat
@@ -43,8 +46,11 @@ func _ready():
     # var target = get_parent().get_parent().get_parent().get_node("Target")
     # set_symbol_target(target)
 
+    light_energy = $Spot.light_energy
+    $Spot.light_energy = 1
 
-func _process(_delta):
+
+func _process(delta):
     var screen_dir = get_screen_dir()
     var sensitivity = 1.0 / screen_dir.length()
     screen_dir = screen_dir.normalized()
@@ -77,6 +83,23 @@ func _process(_delta):
     if pitch != current_pitch:
         # Pitch has changed.
         sing(pitch)
+
+    var target_db = 0
+    var target_energy = 1
+
+    if selected == null:
+        target_db = 0
+        # $Spot.light_energy = 1
+        target_energy = 1
+    elif selected:
+        target_db = 10
+        target_energy = light_energy
+    else:
+        target_db = -10
+        target_energy = -0.5
+
+    $Tones/Voice_1.unit_db = lerp($Tones/Voice_1.unit_db, target_db, delta)
+    $Spot.light_energy = lerp($Spot.light_energy, target_energy, delta)
 
 
 func _input(event):
@@ -218,3 +241,17 @@ func sing(pitch):
     # var note_inst = note_scene.instance()
     # $NotePath.add_child(note_inst)
     # note_inst.set_note(notes[pitch])
+
+
+func set_selected(active):
+    selected = active
+
+    if active == null:
+        # $Spot.light_energy = 1
+        $Tones/Voice_1.unit_db = 0
+    elif active:
+        # $Spot.light_energy = light_energy
+        $Tones/Voice_1.unit_db = 10
+    else:
+        # $Spot.light_energy = -0.5
+        $Tones/Voice_1.unit_db = -10
