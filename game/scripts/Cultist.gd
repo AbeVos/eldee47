@@ -3,6 +3,11 @@ extends Spatial
 export(AudioStream) var voice
 export(String) var central_note = "A4"
 
+export var low_sound = -10.0
+export var high_sound = 10.0
+export var low_energy = 0.5
+export var high_energy = 5.0
+
 signal grab(cultist)
 signal release(cultist)
 
@@ -92,14 +97,14 @@ func _process(delta):
         # $Spot.light_energy = 1
         target_energy = 1
     elif selected:
-        target_db = 10
-        target_energy = light_energy
+        target_db = high_sound
+        target_energy = high_energy
     else:
-        target_db = -10
-        target_energy = -0.5
+        target_db = low_sound
+        target_energy = low_energy
 
-    $Tones/Voice_1.unit_db = lerp($Tones/Voice_1.unit_db, target_db, delta)
-    $Spot.light_energy = lerp($Spot.light_energy, target_energy, delta)
+    $Tones/Voice_1.unit_db = lerp($Tones/Voice_1.unit_db, target_db, 2 * delta)
+    $Spot.light_energy = lerp($Spot.light_energy, target_energy, 2 * delta)
 
 
 func _input(event):
@@ -245,13 +250,3 @@ func sing(pitch):
 
 func set_selected(active):
     selected = active
-
-    if active == null:
-        # $Spot.light_energy = 1
-        $Tones/Voice_1.unit_db = 0
-    elif active:
-        # $Spot.light_energy = light_energy
-        $Tones/Voice_1.unit_db = 10
-    else:
-        # $Spot.light_energy = -0.5
-        $Tones/Voice_1.unit_db = -10
