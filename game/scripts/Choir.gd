@@ -10,7 +10,13 @@ export var groups = {
     2: ["A6", "A5", "A4"],
 }
 
+var cultist_selection = null
+var light_energy = 3
+
 func _ready():
+    for cultist in self.get_node("Cultists").get_children():
+        cultist.connect("grab", self, "_on_grab")
+        cultist.connect("release", self, "_on_release")
     hat_colors()
 
 
@@ -28,12 +34,11 @@ func _on_Metronome_timeout():
     for group_key in groups:
         emit_signal("send_assignments", group_key, assignments[group_key])
 
-    print("symbols: ", symbols)
-    print("assignments: ", assignments)
+    # print("symbols: ", symbols)
+    # print("assignments: ", assignments)
 
 
 func _on_Monster_set_target(cultist_index, target):
-    print("AAAHHH")
     $Cultists.get_children()[cultist_index].set_symbol_target(target)
 
 
@@ -91,3 +96,16 @@ func hat_colors():
         var mat = hat.get_surface_material(0).duplicate(true)
         mat.albedo_color = colors[i]
         hat.set_surface_material(0, mat)
+
+
+func _on_grab(cultist):
+    print("Grab" + cultist.get_name())
+
+    for member in get_node("Cultists").get_children():
+        member.set_selected(member == cultist)
+
+
+func _on_release(cultist):
+    print("Release" + cultist.get_name())
+    for member in get_node("Cultists").get_children():
+        member.set_selected(null)

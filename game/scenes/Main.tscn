@@ -14,10 +14,10 @@
 autostart = true
 
 [node name="Monster" parent="." instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+transform = Transform( -0.642787, 0, -0.766045, 0, 1, 0, 0.766045, 0, -0.642787, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.83504, 0.389043, -0.389043, 0, 0.707107, 0.707107, 0.550189, -0.590462, 0.590462, -5.7497, 6.74, 7.97318 )
+transform = Transform( 0.83504, 0.389042, -0.389042, 0, 0.707107, 0.707107, 0.550189, -0.590462, 0.590463, -5.7497, 6.74, 7.97318 )
 
 [node name="Bloodpool" type="CSGMesh" parent="."]
 transform = Transform( 6, 0, 0, 0, 0.032, 0, 0, 0, 6, 0, 0, 0 )
@@ -28,13 +28,13 @@ material = ExtResource( 2 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -10.0
 autoplay = true
-bus = "Ambience"
 
 [node name="MonsterAmbient" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -10.0
 autoplay = true
-bus = "Ambience"
 [connection signal="timeout" from="IncrementTimer" to="Monster" method="_on_IncrementTimer_timeout"]
 [connection signal="set_target" from="Monster" to="Choir" method="_on_Monster_set_target"]
 [connection signal="send_assignments" from="Choir" to="Monster" method="_on_Choir_send_assignments"]

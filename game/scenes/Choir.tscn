@@ -27,7 +27,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Cultists" type="Node" parent="."]
+[node name="Cultists" type="Spatial" parent="."]
 
 [node name="Cultist_0" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( 0.890444, 0, -0.455094, 0, 1, 0, 0.455094, 0, 0.890444, 3.57752, -4.76837e-07, -5.81494 )
@@ -46,28 +46,24 @@ vocals = [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 15 ) ]
 
 [node name="Cultist_3" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.882357, 0, 0.47058, 0, 1, 0, -0.47058, 0, -0.882357, -3.70438, 0, 6.61486 )
-visible = false
 central_note = "E5"
 index = 3
 vocals = [ ExtResource( 14 ), ExtResource( 18 ), ExtResource( 9 ) ]
 
 [node name="Cultist_4" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.560089, 0, -0.828432, 0, 1, 0, 0.828432, 0, -0.560089, 5.68674, -4.76837e-07, 4.64708 )
-visible = false
 central_note = "A5"
 index = 4
 vocals = [ ExtResource( 17 ), ExtResource( 26 ), ExtResource( 20 ) ]
 
 [node name="Cultist_5" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.020942, 0, -0.99978, 0, 1, 0, 0.99978, 0, -0.020942, 7.33161, -4.76837e-07, 0.0125455 )
-visible = false
 central_note = "C6"
 index = 5
 vocals = [ ExtResource( 25 ), ExtResource( 21 ), ExtResource( 24 ) ]
 
 [node name="Cultist_6" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.361218, 0, 0.932481, 0, 1, 0, -0.932481, 0, -0.361218, -6.84985, -4.76837e-07, 2.49097 )
-visible = false
 central_note = "E6"
 index = 6
 vocals = [ ExtResource( 22 ), ExtResource( 16 ), ExtResource( 19 ) ]
@@ -75,9 +71,4 @@ vocals = [ ExtResource( 22 ), ExtResource( 16 ), ExtResource( 19 ) ]
 [node name="Metronome" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-
-[node name="CSGCylinder" type="CSGCylinder" parent="."]
-visible = false
-radius = 6.20486
-sides = 9
 [connection signal="timeout" from="Metronome" to="." method="_on_Metronome_timeout"]

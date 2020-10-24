@@ -1,25 +1,25 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scenes/Arm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Cultist.gd" type="Script" id=2]
-[ext_resource path="res://audio/vox_01_03.ogg" type="AudioStream" id=4]
+[ext_resource path="res://audio/vox_01_03.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scenes/assets/Cultist.tscn" type="PackedScene" id=4]
 [ext_resource path="res://audio/vox_01_02.ogg" type="AudioStream" id=5]
 [ext_resource path="res://scenes/Note.tscn" type="PackedScene" id=6]
 [ext_resource path="res://audio/vox_01_01.ogg" type="AudioStream" id=7]
 
-[sub_resource type="CapsuleMesh" id=1]
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.488351
+height = 1.87866
 
-[sub_resource type="SpatialMaterial" id=2]
-
-[sub_resource type="Curve3D" id=3]
+[sub_resource type="Curve3D" id=2]
 _data = {
 "points": PoolVector3Array(  ),
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="PrismMesh" id=4]
+[sub_resource type="PrismMesh" id=3]
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=4]
 flags_unshaded = true
 
 [node name="Cultist" type="Spatial"]
@@ -27,45 +27,50 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-vocals = [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 4 ) ]
+vocals = [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ) ]
+high_sound = 20.0
 
-[node name="Left" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.704584, 0, 0 )
-
-[node name="Right" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.725942, 0, 0 )
-
-[node name="Body" type="MeshInstance" parent="."]
+[node name="Body" type="Spatial" parent="."]
 transform = Transform( 0.5, 0, 0, 0, -8.14603e-08, -0.8, 0, 0.5, -1.30337e-07, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+
+[node name="Area" type="Area" parent="Body"]
+transform = Transform( 2, 0, 0, 0, -3.25843e-07, 2, 0, -1.25, -2.03651e-07, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Body/Area"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.133168, 3.21714e-14 )
+shape = SubResource( 1 )
 
 [node name="Voices" type="Spatial" parent="."]
 
 [node name="Voice_1" type="AudioStreamPlayer3D" parent="Voices"]
-bus = "Chanting"
 
 [node name="Voice_2" type="AudioStreamPlayer3D" parent="Voices"]
-bus = "Chanting"
 
 [node name="Voice_3" type="AudioStreamPlayer3D" parent="Voices"]
-bus = "Chanting"
 
 [node name="NotePath" type="Path" parent="."]
-curve = SubResource( 3 )
+curve = SubResource( 2 )
 
 [node name="Note" parent="NotePath" instance=ExtResource( 6 )]
 
 [node name="Hat" type="MeshInstance" parent="."]
 transform = Transform( 0.259723, 0, 0, 0, 0.259723, 0, 0, 0, 0.259723, 0.00508595, 1.36917, 0.0019474 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="NoteTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.7
 autostart = true
-[connection signal="grabbed" from="Left" to="." method="_on_Left_grabbed"]
-[connection signal="released" from="Left" to="." method="_on_Left_released"]
-[connection signal="grabbed" from="Right" to="." method="_on_Right_grabbed"]
-[connection signal="released" from="Right" to="." method="_on_Right_released"]
+
+[node name="Cultist_model" parent="." instance=ExtResource( 4 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -1.20486, 0 )
+
+[node name="Spot" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 5, 0 )
+light_energy = 5.0
+spot_range = 10.0
+spot_angle = 25.0
+[connection signal="mouse_entered" from="Body/Area" to="." method="_on_Area_mouse_entered"]
+[connection signal="mouse_exited" from="Body/Area" to="." method="_on_Area_mouse_exited"]
 [connection signal="timeout" from="NoteTimer" to="." method="_on_NoteTimer_timeout"]

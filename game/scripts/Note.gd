@@ -39,7 +39,7 @@ func set_note(note):
     var u = float(col) / NOTE_GRID_COLS
     var v = float(row) / NOTE_GRID_ROWS
     var uv_offset = Vector3(u, v, 0)
-    print("(%s,%s)" % [row, col], "%s: %s" % [note, index], uv_offset)
+    # print("(%s,%s)" % [row, col], "%s: %s" % [note, index], uv_offset)
 
     material.uv1_offset = uv_offset
     $NoteParticle.material_override = material
