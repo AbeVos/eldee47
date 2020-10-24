@@ -16,7 +16,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-scrollspeed = 40.0
+scrollspeed = 30.0
+fadespeed = 1.0
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -32,9 +33,8 @@ anchor_top = 0.1
 anchor_right = 0.95
 anchor_bottom = 1.0
 margin_left = -0.200001
-margin_top = -0.486328
 margin_right = 0.200012
-margin_bottom = 930.514
+margin_bottom = 1228.0
 custom_fonts/font = SubResource( 1 )
 text = "
 
@@ -42,15 +42,34 @@ text = "
 
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula augue a iaculis scelerisque.
+The Tomb of Annihilation has been opened again...
 
 
 
+The ritual is prepaired. The priest are chanting. The drums beat. The priests preform their ritual, and by day, the houses are burning.
+
+
+By night, the men and women of the city are dancing. They party, they dance, they sing, and they celebrate. That is when the warriors of blood and ice arrive. 
+
+
+We must suvive this time! 
+
+
+The Ancient one, the pinnacle of protection, the Master’s Weapon, the conduit for his devine power! With his blessed gift, the Ancient one protects the Master, and the Master’s people.
+
+
+We must summon the Ancient one. We must bring order to the world. 
+
+
+...
 
 
 
+Zal'guraz we summon thy!
 
-Sed porttitor, erat id mattis auctor, ipsum nunc venenatis elit, egestas vehicula dui mauris sit amet enim. Phasellus nec nibh eu ipsum interdum fringilla vel quis nisl. Quisque eget venenatis ipsum, aliquam tempor magna. Suspendisse maximus mollis porta. Aliquam felis dui, auctor ac lorem eu, placerat iaculis magna. Etiam in quam vel dolor scelerisque vestibulum. Phasellus fringilla metus sit amet justo mattis ultricies vitae eget ligula. 
+RISE UP!
+
+RISE UP ZAL'GURAZ !!!
 
 
 "
