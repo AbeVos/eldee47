@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Cultist.gd" type="Script" id=2]
-[ext_resource path="res://audio/vox_loop_01.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/vox_01_03.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenes/assets/Cultist.tscn" type="PackedScene" id=4]
+[ext_resource path="res://audio/vox_01_02.ogg" type="AudioStream" id=5]
 [ext_resource path="res://scenes/Note.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/vox_01_01.ogg" type="AudioStream" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.488351
@@ -22,7 +24,11 @@ flags_unshaded = true
 
 [node name="Cultist" type="Spatial"]
 script = ExtResource( 2 )
-voice = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+vocals = [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ) ]
+high_sound = 20.0
 
 [node name="Body" type="Spatial" parent="."]
 transform = Transform( 0.5, 0, 0, 0, -8.14603e-08, -0.8, 0, 0.5, -1.30337e-07, 0, 0, 0 )
@@ -34,11 +40,13 @@ transform = Transform( 2, 0, 0, 0, -3.25843e-07, 2, 0, -1.25, -2.03651e-07, 0, 0
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.133168, 3.21714e-14 )
 shape = SubResource( 1 )
 
-[node name="Tones" type="Spatial" parent="."]
+[node name="Voices" type="Spatial" parent="."]
 
-[node name="Voice_1" type="AudioStreamPlayer3D" parent="Tones"]
-stream = ExtResource( 3 )
-autoplay = true
+[node name="Voice_1" type="AudioStreamPlayer3D" parent="Voices"]
+
+[node name="Voice_2" type="AudioStreamPlayer3D" parent="Voices"]
+
+[node name="Voice_3" type="AudioStreamPlayer3D" parent="Voices"]
 
 [node name="NotePath" type="Path" parent="."]
 curve = SubResource( 2 )

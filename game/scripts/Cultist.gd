@@ -1,8 +1,9 @@
 extends Spatial
 
-export(AudioStream) var voice
 export(String) var central_note = "A4"
 
+export(int) var index
+export(Array, AudioStream) var vocals = []
 export var low_sound = -10.0
 export var high_sound = 10.0
 export var low_energy = 0.5
@@ -34,9 +35,13 @@ func _ready():
     current_pitch = null
     current_note = null
 
-    assert(voice != null)
-    $Tones/Voice_1.stream = voice
-    $Tones/Voice_1.playing = true
+    assert(len(vocals) == 3)
+
+    var voices = $Voices.get_children()
+
+    for idx in range(3):
+        voices[idx].stream = vocals[idx]
+        voices[idx].playing = false
 
     # Make sure the note symbols float upwards.
     set_symbol_target(null)
@@ -103,8 +108,9 @@ func _process(delta):
         target_db = low_sound
         target_energy = low_energy
 
-    $Tones/Voice_1.unit_db = lerp($Tones/Voice_1.unit_db, target_db, 2 * delta)
-    $Spot.light_energy = lerp($Spot.light_energy, target_energy, 2 * delta)
+    for voice in $Voices.get_children():
+        voice.unit_db = lerp(voice.unit_db, target_db, 5 * delta)
+    $Spot.light_energy = lerp($Spot.light_energy, target_energy, 5 * delta)
 
 
 func _input(event):
@@ -221,14 +227,20 @@ func get_note():
     return current_note
 
 
-func lerp(a, b, t):
-    return (1 - t) * a + t * b
+# func lerp(a, b, t):
+    # return (1 - t) * a + t * b
 
 
 func sing(pitch):
     print(pitch)
     # Change pitch.
-    $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
+    # $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
+    if current_pitch != null:
+        $Voices.get_children()[current_pitch].stop()
+
+    $Voices.get_children()[pitch].play(SceneChanger.get_music_progress())
+
+    # TODO: Shift pitch?
 
     var note_idx = Globals.NOTES.keys().find(central_note);
     assert(note_idx >= 0)

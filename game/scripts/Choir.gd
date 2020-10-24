@@ -10,7 +10,7 @@ export var groups = {
     2: ["A6", "A5", "A4"],
 }
 
-var selected_cultist = null
+var cultist_selection = null
 var light_energy = 3
 
 func _ready():
