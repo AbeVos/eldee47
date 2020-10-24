@@ -16,7 +16,9 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+scene_to_load = "res://scenes/Title_screen.tscn"
 scrollspeed = 40.0
+fadespeed = 2.0
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -32,9 +34,9 @@ anchor_top = 0.1
 anchor_right = 0.95
 anchor_bottom = 1.0
 margin_left = -0.200001
-margin_top = -0.486328
+margin_top = 2.0
 margin_right = 0.200012
-margin_bottom = 930.514
+margin_bottom = 516.0
 custom_fonts/font = SubResource( 1 )
 text = "
 
@@ -42,7 +44,8 @@ text = "
 
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula augue a iaculis scelerisque.
+
+The ritual has failed! The penance has begun!
 
 
 
@@ -50,7 +53,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula augue a i
 
 
 
-Sed porttitor, erat id mattis auctor, ipsum nunc venenatis elit, egestas vehicula dui mauris sit amet enim. Phasellus nec nibh eu ipsum interdum fringilla vel quis nisl. Quisque eget venenatis ipsum, aliquam tempor magna. Suspendisse maximus mollis porta. Aliquam felis dui, auctor ac lorem eu, placerat iaculis magna. Etiam in quam vel dolor scelerisque vestibulum. Phasellus fringilla metus sit amet justo mattis ultricies vitae eget ligula. 
+
+
+We must atone for our sins...
+
+
 
 
 "

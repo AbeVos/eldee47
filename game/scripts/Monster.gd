@@ -2,6 +2,9 @@ extends Spatial
 
 signal set_target(cultist_index, target)  # Target for particles.
 
+export(String, FILE, "*.tscn,*.scn") var win_scene = "res://scenes/WinCinematic.tscn"
+export(String, FILE, "*.tscn,*.scn") var fail_scene = "res://scenes/LoseCinematic.tscn"
+
 onready var results = []
 onready var is_active = true
 
@@ -28,13 +31,11 @@ func _process(_delta):
 		is_active = false
 		var total = 0
 		for i in range(results.size()):
-			total += i
-		if (total >= results.size()):
-			SceneChanger.change_scene("res://scenes/WinScene.tscn", 0.5)
-		elif (total > 0):
-			SceneChanger.change_scene("res://scenes/FailScene.tscn", 0.5)
+			total += results[i]
+		if (total >= 3):
+			SceneChanger.change_scene(win_scene, 0.5)
 		else:
-			SceneChanger.change_scene("res://scenes/FailScene.tscn", 0.5)
+			SceneChanger.change_scene(fail_scene, 0.5)
 
 
 func _on_IncrementTimer_timeout():
