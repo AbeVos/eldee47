@@ -57,6 +57,12 @@ autostart = true
 
 [node name="Cultist_model" parent="." instance=ExtResource( 4 )]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -1.20486, 0 )
+
+[node name="Spot" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 5, 0 )
+light_energy = 5.0
+spot_range = 10.0
+spot_angle = 25.0
 [connection signal="mouse_entered" from="Body/Area" to="." method="_on_Area_mouse_entered"]
 [connection signal="mouse_exited" from="Body/Area" to="." method="_on_Area_mouse_exited"]
 [connection signal="timeout" from="NoteTimer" to="." method="_on_NoteTimer_timeout"]

@@ -3,6 +3,14 @@ extends Spatial
 export(AudioStream) var voice
 export(String) var central_note = "A4"
 
+export var low_sound = -10.0
+export var high_sound = 10.0
+export var low_energy = 0.5
+export var high_energy = 5.0
+
+signal grab(cultist)
+signal release(cultist)
+
 var note_scene = preload("res://scenes/Note.tscn")
 var current_pitch
 var current_note
@@ -15,6 +23,9 @@ var old_pitch_value = 0
 
 var mouse_over = false
 var dragging = false
+
+var light_energy = 1
+var selected = null
 
 func _ready():
     var mat = $Cultist_model/Skeleton/MOD_Cultist.material_override.duplicate(true)
@@ -40,8 +51,11 @@ func _ready():
     # var target = get_parent().get_parent().get_parent().get_node("Target")
     # set_symbol_target(target)
 
+    light_energy = $Spot.light_energy
+    $Spot.light_energy = 1
 
-func _process(_delta):
+
+func _process(delta):
     var screen_dir = get_screen_dir()
     var sensitivity = 1.0 / screen_dir.length()
     screen_dir = screen_dir.normalized()
@@ -75,11 +89,33 @@ func _process(_delta):
         # Pitch has changed.
         sing(pitch)
 
+    var target_db = 0
+    var target_energy = 1
+
+    if selected == null:
+        target_db = 0
+        # $Spot.light_energy = 1
+        target_energy = 1
+    elif selected:
+        target_db = high_sound
+        target_energy = high_energy
+    else:
+        target_db = low_sound
+        target_energy = low_energy
+
+    $Tones/Voice_1.unit_db = lerp($Tones/Voice_1.unit_db, target_db, 2 * delta)
+    $Spot.light_energy = lerp($Spot.light_energy, target_energy, 2 * delta)
+
 
 func _input(event):
     if event is InputEventMouseButton:
-        dragging = mouse_over and event.is_pressed()
-
+        var start_dragging = mouse_over and event.is_pressed()
+        if start_dragging and not dragging:
+            emit_signal("grab", self)
+            dragging = true
+        elif not start_dragging and dragging:
+            emit_signal("release", self)
+            dragging = false
 
 ###########
 # Signals #
@@ -210,3 +246,7 @@ func sing(pitch):
     # var note_inst = note_scene.instance()
     # $NotePath.add_child(note_inst)
     # note_inst.set_note(notes[pitch])
+
+
+func set_selected(active):
+    selected = active
