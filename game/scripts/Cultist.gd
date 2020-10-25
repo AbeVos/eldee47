@@ -1,8 +1,7 @@
 extends Spatial
 
-export(String) var central_note = "A4"
-
-export(int) var index
+export(int) var index  # Cultist's index for the Choir.
+export(Array, String) var runes = ["A.", "B-", "C*"]
 export(Array, AudioStream) var vocals = []
 export var low_sound = -10.0
 export var high_sound = 10.0
@@ -12,9 +11,9 @@ export var high_energy = 5.0
 signal grab(cultist)
 signal release(cultist)
 
-var note_scene = preload("res://scenes/Note.tscn")
+var rune_scene = preload("res://scenes/Note.tscn")
 var current_pitch
-var current_note
+var current_rune
 var uv_offset = Vector3(0, 0, 0)
 var viewport
 var camera
@@ -33,7 +32,8 @@ func _ready():
     $Cultist_model/Skeleton/MOD_Cultist.material_override = mat
 
     current_pitch = null
-    current_note = null
+    current_rune = null
+    # self.sing(1)
 
     assert(len(vocals) == 3)
 
@@ -46,9 +46,9 @@ func _ready():
     # Make sure the note symbols float upwards.
     set_symbol_target(null)
 
-    var note_inst = note_scene.instance()
-    $NotePath.add_child(note_inst)
-    note_inst.set_note(central_note)
+    # var rune_inst = rune_scene.instance()
+    # rune_inst.set_rune(runes[1])
+    # $NotePath.add_child(rune_inst)
 
     viewport = get_viewport()
     camera = viewport.get_camera()
@@ -127,9 +127,9 @@ func _input(event):
 # Signals #
 ###########
 func _on_NoteTimer_timeout():
-    var note_inst = note_scene.instance()
-    $NotePath.add_child(note_inst)
-    note_inst.set_note(current_note)
+    var rune_inst = rune_scene.instance()
+    $NotePath.add_child(rune_inst)
+    rune_inst.set_rune(current_rune)
 
 
 func _on_Area_mouse_entered():
@@ -223,8 +223,8 @@ func get_screen_dir():
     return screen_top - screen_pos
 
 
-func get_note():
-    return current_note
+func get_rune():
+    return current_rune
 
 
 # func lerp(a, b, t):
@@ -232,7 +232,7 @@ func get_note():
 
 
 func sing(pitch):
-    print(pitch)
+    # pitch = 2 - pitch
     # Change pitch.
     # $Tones/Voice_1.pitch_scale = Globals.PITCH_SCALES[pitch]
     if current_pitch != null:
@@ -240,24 +240,10 @@ func sing(pitch):
 
     $Voices.get_children()[pitch].play(SceneChanger.get_music_progress())
 
-    # TODO: Shift pitch?
-
-    var note_idx = Globals.NOTES.keys().find(central_note);
-    assert(note_idx >= 0)
-
-    # Collect the notes based on semitone distance from the central note.
-    var notes = [
-        Globals.NOTES.keys()[note_idx - Globals.SEMITONES],
-        central_note,
-        Globals.NOTES.keys()[note_idx + Globals.SEMITONES],
-    ]
-
     current_pitch = pitch
-    current_note = notes[pitch]
+    current_rune = runes[pitch]
 
-    # var note_inst = note_scene.instance()
-    # $NotePath.add_child(note_inst)
-    # note_inst.set_note(notes[pitch])
+    print(current_pitch, current_rune)
 
 
 func set_selected(active):

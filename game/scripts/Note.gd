@@ -8,7 +8,7 @@ export(float) var altitude = 1
 export(int) var frequency = 1
 
 var random_offset
-var current_note
+var current_rune
 var material
 
 func _ready():
@@ -28,16 +28,18 @@ func _process(delta):
     v_offset = altitude * sin(2 * frequency * PI * unit_offset + random_offset)
 
 
-func set_note(note):
-    current_note = note
-    var index = Globals.NOTES[note]
+func set_rune(rune):
+    current_rune = rune
+    var index = Globals.RUNES[rune]
 
     # Change note sprite.
+    var row = int(index / NOTE_GRID_COLS)
     var col = index % NOTE_GRID_COLS
-    var row = (index - col) / NOTE_GRID_ROWS
+    # var row = (index - col) / NOTE_GRID_ROWS
 
     var u = float(col) / NOTE_GRID_COLS
     var v = float(row) / NOTE_GRID_ROWS
+    print(u, v)
     var uv_offset = Vector3(u, v, 0)
     # print("(%s,%s)" % [row, col], "%s: %s" % [note, index], uv_offset)
 

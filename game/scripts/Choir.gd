@@ -5,9 +5,9 @@ signal send_assignments(group_key, assignment)
 const CultistResource = preload("res://scenes/Cultist.tscn")
 
 export var groups = {
-    0: ["A4", "C5", "B4"],
-    1: ["A5", "G5", "E6"],
-    2: ["A6", "A5", "A4"],
+    0: ["A*", "A-", "A."],
+    1: ["B*", "B-", "B."],
+    2: ["C*", "C-", "C."],
 }
 
 var cultist_selection = null
@@ -25,7 +25,7 @@ func _on_Metronome_timeout():
     var symbols = []
 
     for cultist in $Cultists.get_children():
-        symbols.append(cultist.get_note())
+        symbols.append(cultist.get_rune())
 
     # Assign symbols to groups.
     var assignments = assign_symbols(symbols)

@@ -52,6 +52,7 @@ shape = SubResource( 1 )
 curve = SubResource( 2 )
 
 [node name="Note" parent="NotePath" instance=ExtResource( 6 )]
+visible = false
 
 [node name="Hat" type="MeshInstance" parent="."]
 transform = Transform( 0.259723, 0, 0, 0, 0.259723, 0, 0, 0, 0.259723, 0.00508595, 1.36917, 0.0019474 )
