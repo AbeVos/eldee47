@@ -31,41 +31,41 @@ __meta__ = {
 
 [node name="Cultist_0" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( 0.890444, 0, -0.455094, 0, 1, 0, 0.455094, 0, 0.890444, 3.57752, -4.76837e-07, -5.81494 )
-central_note = "A6"
+runes = [ "A.", "A-", "A*" ]
 
 [node name="Cultist_1" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( 0.88537, 0, 0.464889, 0, 1, 0, -0.464889, 0, 0.88537, -3.62161, 0.00579929, -6.07265 )
 index = 1
+runes = [ "B.", "B-", "B*" ]
 vocals = [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 23 ) ]
 
 [node name="Cultist_2" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( 0.534219, 0, 0.845346, 0, 1, 0, -0.845346, 0, 0.534219, -6.74214, 0, -2.75376 )
-central_note = "C5"
 index = 2
+runes = [ "C.", "C-", "C*" ]
 vocals = [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 15 ) ]
 
 [node name="Cultist_3" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.882357, 0, 0.47058, 0, 1, 0, -0.47058, 0, -0.882357, -3.70438, 0, 6.61486 )
-central_note = "E5"
 index = 3
 vocals = [ ExtResource( 14 ), ExtResource( 18 ), ExtResource( 9 ) ]
 
 [node name="Cultist_4" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.560089, 0, -0.828432, 0, 1, 0, 0.828432, 0, -0.560089, 5.68674, -4.76837e-07, 4.64708 )
-central_note = "A5"
 index = 4
+runes = [ "C.", "A-", "B*" ]
 vocals = [ ExtResource( 17 ), ExtResource( 26 ), ExtResource( 20 ) ]
 
 [node name="Cultist_5" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.020942, 0, -0.99978, 0, 1, 0, 0.99978, 0, -0.020942, 7.33161, -4.76837e-07, 0.0125455 )
-central_note = "C6"
 index = 5
+runes = [ "B.", "C-", "A*" ]
 vocals = [ ExtResource( 25 ), ExtResource( 21 ), ExtResource( 24 ) ]
 
 [node name="Cultist_6" parent="Cultists" instance=ExtResource( 2 )]
 transform = Transform( -0.361218, 0, 0.932481, 0, 1, 0, -0.932481, 0, -0.361218, -6.84985, -4.76837e-07, 2.49097 )
-central_note = "E6"
 index = 6
+runes = [ "C.", "B-", "A*" ]
 vocals = [ ExtResource( 22 ), ExtResource( 16 ), ExtResource( 19 ) ]
 
 [node name="Metronome" type="Timer" parent="."]

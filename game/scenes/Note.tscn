@@ -1,15 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/NoteParticle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Note.gd" type="Script" id=2]
-
-[sub_resource type="ParticlesMaterial" id=3]
-direction = Vector3( 0, 0, 0 )
-gravity = Vector3( 0, 0, 0 )
-scale = 1.2
-scale_random = 1.0
-
-[sub_resource type="QuadMesh" id=4]
 
 [node name="Note" type="PathFollow"]
 rotation_mode = 4
@@ -24,8 +16,3 @@ altitude = 0.1
 frequency = 4
 
 [node name="NoteParticle" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
-amount = 4
-visibility_aabb = AABB( -1, -1, -1, 2, 2, 2 )
-process_material = SubResource( 3 )
-draw_pass_1 = SubResource( 4 )
